@@ -20,4 +20,9 @@ It is operated via the context menu of the tray icon or the main window.
 ## App Download ##
 [Linux App 64bit Download](https://www.dropbox.com/s/g8o6h8i740f23r6/ExclusiveRadio64_Qt5.tar.gz?dl=1)
 
+tested in:
+
+-  Mint 20
+- Kubuntu 20.04
+
 extract it and run ExclusiveRadio

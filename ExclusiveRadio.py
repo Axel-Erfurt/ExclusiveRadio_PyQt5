@@ -13,7 +13,7 @@ from PyQt5.QtMultimedia import QMediaPlayer, QMediaContent
 from PyQt5.QtGui import (QIcon, QPixmap)
 
 changed = pyqtSignal(QMimeData)
-btnwidth = 60
+btnwidth = 48
         
 
 class MainWin(QMainWindow):
@@ -40,6 +40,11 @@ class MainWin(QMainWindow):
         self.layout1 = QHBoxLayout()
         self.tIcon = QIcon(os.path.join(os.path.dirname(sys.argv[0]), "logo.png"))
         self.headerlogo = QIcon(os.path.join(os.path.dirname(sys.argv[0]), "headerlogo.png"))
+        self.playIcon = QIcon(os.path.join(os.path.dirname(sys.argv[0]), "media-playback-start.svg"))
+        self.stopIcon = QIcon(os.path.join(os.path.dirname(sys.argv[0]), "media-playback-stop.svg"))
+        self.recordIcon = QIcon(os.path.join(os.path.dirname(sys.argv[0]), "media-record.svg"))
+        self.hideIcon = QIcon(os.path.join(os.path.dirname(sys.argv[0]), "hide.png"))
+        
         self.outfile = QStandardPaths.standardLocations(QStandardPaths.TempLocation)[0] + "/er_tmp.mp3"
         self.recording_enabled = False
         self.is_recording = False
@@ -49,43 +54,32 @@ class MainWin(QMainWindow):
 
         self.play_btn = QPushButton("", self)
         self.play_btn.setFixedWidth(btnwidth)
-        self.play_btn.setFlat(True)
-        self.play_btn.setIcon(QIcon.fromTheme("media-playback-start"))
+        self.play_btn.setIcon(self.playIcon)
         self.layout1.addWidget(self.play_btn)
-
-        self.pause_btn = QPushButton("", self)
-        self.pause_btn.setFixedWidth(btnwidth)
-        self.pause_btn.setFlat(True)
-        self.pause_btn.setIcon(QIcon.fromTheme("media-playback-pause"))
-        self.layout1.addWidget(self.pause_btn)
 
         self.stop_btn = QPushButton("", self)
         self.stop_btn.setFixedWidth(btnwidth)
-        self.stop_btn.setFlat(True)
-        self.stop_btn.setIcon(QIcon.fromTheme("media-playback-stop"))
+        self.stop_btn.setIcon(self.stopIcon)
         self.layout1.addWidget(self.stop_btn)
         ### record
         self.rec_btn = QPushButton("", self)
         self.rec_btn.setFixedWidth(btnwidth)
-        self.rec_btn.setFlat(True)
-        self.rec_btn.setIcon(QIcon.fromTheme("media-record"))
+        self.rec_btn.setIcon(self.recordIcon)
         self.rec_btn.clicked.connect(self.recordRadio)
         self.rec_btn.setToolTip("Record Station")
         self.layout1.addWidget(self.rec_btn)
         ### stop record
         self.stoprec_btn = QPushButton("", self)
-        self.stoprec_btn.setFixedWidth(btnwidth + 60)
-        self.stoprec_btn.setFlat(True)
-        self.stoprec_btn.setIcon(QIcon.fromTheme("media-playback-stop"))
+        self.stoprec_btn.setFixedWidth(btnwidth)
+        self.stoprec_btn.setIcon(self.stopIcon)
         self.stoprec_btn.clicked.connect(self.stop_recording)
         self.stoprec_btn.setToolTip("stop Recording")
         self.layout1.addWidget(self.stoprec_btn)
         ### hide Main Window
         self.hide_btn = QPushButton("", self)
-        self.hide_btn.setFixedWidth(26)
-        self.hide_btn.setFlat(True)
+        self.hide_btn.setFixedWidth(btnwidth)
         self.hide_btn.setToolTip("hide Main Window")
-        self.hide_btn.setIcon(QIcon.fromTheme("window-hide"))
+        self.hide_btn.setIcon(self.hideIcon)
         self.hide_btn.clicked.connect(self.showMain)
         self.layout1.addWidget(self.hide_btn)        
         
@@ -107,7 +101,6 @@ class MainWin(QMainWindow):
         self.player.metaDataChanged.connect(self.metaDataChanged)
         self.player.error.connect(self.handleError)
         self.play_btn.clicked.connect(self.playRadioStation)
-        self.pause_btn.clicked.connect(self.pause_preview)
         self.stop_btn.clicked.connect(self.stop_preview)
         self.level_sld.valueChanged.connect(self.set_sound_level)
         self.urlCombo.currentIndexChanged.connect(self.url_changed)
@@ -463,7 +456,7 @@ class MainWin(QMainWindow):
                 pixmap.loadFromData(data)
                 self.er_label.setPixmap(pixmap)
                 url = self.radiolist[ind]
-                print(url)
+                #print(url)
                 
                 if url.endswith(".m3u"):
                     url = self.getURLfromM3U(url)
@@ -475,8 +468,8 @@ class MainWin(QMainWindow):
                 self.rec_btn.setVisible(True)
                 self.stop_btn.setVisible(True)
                 self.play_btn.setVisible(True)
-                self.pause_btn.setVisible(True)
-                print("%s %s" %("playing", url))
+                name = self.urlCombo.currentText()
+                print(f"playing {name} from {url}")
                 self.playRadioStation()
                 if self.togglePlayerAction.text() == "stop Recording":
                     self.togglePlayerAction.setText("start Player")
@@ -488,13 +481,12 @@ class MainWin(QMainWindow):
                 self.rec_btn.setVisible(False)
                 self.stop_btn.setVisible(False)
                 self.play_btn.setVisible(False)
-                self.pause_btn.setVisible(False)
  
     def playRadioStation(self):
         if self.player.is_on_pause:
             self.set_running_player()
             self.player.start()
-            self.pause_btn.setFocus()
+            self.stop_btn.setFocus()
             self.togglePlayerAction.setText("stop Recording")
             self.togglePlayerAction.setIcon(QIcon.fromTheme("media-playback-stop"))
  
@@ -515,14 +507,12 @@ class MainWin(QMainWindow):
  
     def set_running_player(self):
         self.play_btn.setEnabled(False)
-        self.pause_btn.setEnabled(True)
         self.stop_btn.setEnabled(True)
         self.rec_btn.setEnabled(True)
  
     def pause_preview(self):
         self.player.set_on_pause()
         self.play_btn.setEnabled(True)
-        self.pause_btn.setEnabled(False)
         self.rec_btn.setEnabled(False)
         self.play_btn.setFocus(True)
         self.statusBar.showMessage("Pause")
@@ -530,7 +520,6 @@ class MainWin(QMainWindow):
     def stop_preview(self):
         self.player.finish()
         self.play_btn.setEnabled(True)
-        self.pause_btn.setEnabled(False)
         self.stop_btn.setEnabled(False)
         self.rec_btn.setEnabled(False)
         self.statusBar.showMessage("stopped")
@@ -670,15 +659,16 @@ def mystylesheet(self):
     return """
 QPushButton
 {
-color: #eeeeec;
+background: #2e3436;
+color: #4e9a06;
 }
 QPushButton::hover
 {
-color: #73d216;
+background: #4e9a06;
 }
 QComboBox
 {
-height: 18px;
+height: 20px;
 background: #2e3436;
 color: #eeeeec;
 font-size: 8pt;
@@ -699,7 +689,7 @@ background: transparent;
 QLabel
 {
 border: 0px;
-color: #685c1b;
+color: #c4a000;
 font-size: 9pt;
 }
 QMainWindow

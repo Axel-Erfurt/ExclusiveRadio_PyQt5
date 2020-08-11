@@ -1,4 +1,4 @@
-# ExclusiveRadio_PyQt5
+# ExclusiveRadio PyQt5-Version
 ExclusiveRadio Tray App for Ubuntu/Mint
 
 play and record [Exclusive Radio](https://exclusive.radio) stations

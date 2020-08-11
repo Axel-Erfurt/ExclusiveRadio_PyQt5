@@ -30,6 +30,8 @@ It is operated via the context menu of the tray icon or the main window.
 ## App Download ##
 [Linux App 64bit Download](https://www.dropbox.com/s/g8o6h8i740f23r6/ExclusiveRadio64_Qt5.tar.gz?dl=1)
 
+last Update: Aug 11 2020
+
 tested in:
 
 -  Mint 20

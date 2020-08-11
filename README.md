@@ -17,6 +17,16 @@ It is operated via the context menu of the tray icon or the main window.
 
 - right click on systray icon -> category -> select channel
 
+## Update Channels ##
+
+> python3 exclusive_radio_api_get.py
+
+- creates the file excl_radio.txt in /tmp
+
+- copy/move the file to the ExclusiveRadio folder.
+
+- restart ExclusiveRadio.
+
 ## App Download ##
 [Linux App 64bit Download](https://www.dropbox.com/s/g8o6h8i740f23r6/ExclusiveRadio64_Qt5.tar.gz?dl=1)
 

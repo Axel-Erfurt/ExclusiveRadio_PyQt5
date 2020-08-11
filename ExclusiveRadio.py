@@ -33,6 +33,8 @@ class MainWin(QMainWindow):
         self.notificationsEnabled = True
         self.wg = QWidget()
         self.er_label = QLabel("Image")
+        self.er_label.setScaledContents(False)
+        self.er_label.setFixedSize(225, 150)
         self.layout = QVBoxLayout()
         self.layout.setContentsMargins(10 ,6, 10, 6)
         self.layout1 = QHBoxLayout()
@@ -45,25 +47,25 @@ class MainWin(QMainWindow):
         self.urlCombo = QComboBox(self)
         self.urlCombo.setFixedWidth(220)
 
-        self.play_btn = QPushButton("Play", self)
+        self.play_btn = QPushButton("", self)
         self.play_btn.setFixedWidth(btnwidth)
         self.play_btn.setFlat(True)
         self.play_btn.setIcon(QIcon.fromTheme("media-playback-start"))
         self.layout1.addWidget(self.play_btn)
 
-        self.pause_btn = QPushButton("Pause", self)
+        self.pause_btn = QPushButton("", self)
         self.pause_btn.setFixedWidth(btnwidth)
         self.pause_btn.setFlat(True)
         self.pause_btn.setIcon(QIcon.fromTheme("media-playback-pause"))
         self.layout1.addWidget(self.pause_btn)
 
-        self.stop_btn = QPushButton("Stop", self)
+        self.stop_btn = QPushButton("", self)
         self.stop_btn.setFixedWidth(btnwidth)
         self.stop_btn.setFlat(True)
         self.stop_btn.setIcon(QIcon.fromTheme("media-playback-stop"))
         self.layout1.addWidget(self.stop_btn)
         ### record
-        self.rec_btn = QPushButton("Record", self)
+        self.rec_btn = QPushButton("", self)
         self.rec_btn.setFixedWidth(btnwidth)
         self.rec_btn.setFlat(True)
         self.rec_btn.setIcon(QIcon.fromTheme("media-record"))
@@ -71,7 +73,7 @@ class MainWin(QMainWindow):
         self.rec_btn.setToolTip("Record Station")
         self.layout1.addWidget(self.rec_btn)
         ### stop record
-        self.stoprec_btn = QPushButton("stop Recording", self)
+        self.stoprec_btn = QPushButton("", self)
         self.stoprec_btn.setFixedWidth(btnwidth + 60)
         self.stoprec_btn.setFlat(True)
         self.stoprec_btn.setIcon(QIcon.fromTheme("media-playback-stop"))

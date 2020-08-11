@@ -62,5 +62,5 @@ result = makeList()
 
 print(result)
 
-with open('/home/brian/Dokumente/python_files/newProjects2020/ExclusiveRadio/excl_radio.txt', 'w', encoding='utf8') as f:
+with open('/tmp/excl_radio.txt', 'w', encoding='utf8') as f:
     f.write(result) 

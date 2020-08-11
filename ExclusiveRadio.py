@@ -175,7 +175,7 @@ class MainWin(QMainWindow):
         self.trayIcon.showMessage(title, message, icon, timeout)
             
     def handleError(self):
-        print("Fehler: " + self.player.errorString())
+        print(f"Fehler: {self.player.errorString()}")
         self.showTrayMessage("Error", self.player.errorString(), self.tIcon, 3000)
         self.statusLabel.setText(f"Fehler:\n{self.player.errorString()}")
            
@@ -188,49 +188,6 @@ class MainWin(QMainWindow):
             self.playRadioStation()
             self.togglePlayerAction.setText("stop Recording")
             self.togglePlayerAction.setIcon(QIcon.fromTheme("media-playback-stop"))
-
-    def getURLfromPLS(self, inURL):
-        print("untersuche", inURL)
-        t = ""
-        if "&" in inURL:
-            inURL = inURL.partition("&")[0]
-        response = requests.get(inURL)
-        print(response.text)
-        if "http" in response.text:
-            html = response.text.splitlines()
-            if len(html) > 3:
-                if "http" in str(html[1]):
-                    t = str(html[1])
-                elif "http" in str(html[2]):
-                    t = str(html[2])
-                elif "http" in str(html[3]):
-                    t = str(html[3])
-            elif len(html) > 2:
-                if "http" in str(html[1]):
-                    t = str(html[1])
-                elif "http" in str(html[2]):
-                    t = str(html[2])
-            else:
-                t = str(html[0])
-            url = t.partition("=")[2].partition("'")[0]
-            return (url)
-        else:
-           self.lbl.setText("bad formatted playlist") 
-
-    def getURLfromM3U(self, inURL):
-        print("detecting", inURL)
-        response = requests.get(inURL)
-        html = response.text.splitlines()
-        if "#EXTINF" in str(html):
-            url = str(html[1]).partition("http://")[2].partition('"')[0]
-            url = f"http://{url}"
-        else:
-            if len(html) > 1:
-                url = str(html[1])
-            else:
-                url = str(html[0])
-        print(url)
-        return(url)
         
     def makeTrayMenu(self):
         self.stationActs = []
@@ -242,7 +199,7 @@ class MainWin(QMainWindow):
         for x in reversed(range(len(b))):
             line = b[x]
             if line == "":
-                print("empty line", x, "removed")
+                print(f"empty line {x} removed")
                 del(b[x])
                
         i = 0
@@ -271,7 +228,7 @@ class MainWin(QMainWindow):
         if not self.is_recording:
             if not self.urlCombo.currentText().startswith("--"):
                 self.tray_menu.addAction(self.recordAction)
-                self.recordAction.setText("%s %s: %s" % ("start recording of", "channel", self.urlCombo.currentText()))
+                self.recordAction.setText(f"start recording of channel {self.urlCombo.currentText()}")
         if self.is_recording:
             self.tray_menu.addAction(self.stopRecordAction)
         self.tray_menu.addSeparator()
@@ -298,7 +255,7 @@ class MainWin(QMainWindow):
         elif self.notifAction.text() == "enable Tray Messages":
             self.notifAction.setText("disable Tray Messages")
             self.notificationsEnabled = True
-        print("Notifications", self.notificationsEnabled )
+        print(f"Notifications {self.notificationsEnabled}")
         self.metaDataChanged()
 
     def openTrayStation(self):
@@ -307,7 +264,7 @@ class MainWin(QMainWindow):
             ind = action.data()
             name = action.text()     
             self.urlCombo.setCurrentIndex(self.urlCombo.findText(name))
-            print("%s %s %s" % ("swith to Station:", ind, self.urlCombo.currentText()))
+            print(f"swith to Station: {ind} - {self.urlCombo.currentText()}")
 
     def exitApp(self):
         self.close()
@@ -351,7 +308,7 @@ class MainWin(QMainWindow):
                 self.showWinAction.setText("show Main Window")
         if self.settings.contains("volume"):
             vol = self.settings.value("volume")
-            print("set volume to", vol)
+            print(f"set volume to {vol}")
             self.level_sld.setValue(int(vol))
                 
     def writeSettings(self):
@@ -388,7 +345,7 @@ class MainWin(QMainWindow):
     def findExecutable(self):
         wget = QStandardPaths.findExecutable("wget")
         if wget != "":
-            print("%s %s %s" % ("found wget at ", wget, " *** recording available"))
+            print(f"found wget at {wget} *** recording available")
             self.statusLabel.setText("Aufnahmen möglich")
             self.showTrayMessage("Note", "found wget\nrecording available", self.tIcon)
             self.recording_enabled = True
@@ -423,7 +380,7 @@ class MainWin(QMainWindow):
             description = (self.player.metaData("Description"))
             comment = (self.player.metaData("Comment"))
             if trackInfo is None:
-                self.statusLabel.setText("%s %s" % ("playing", self.urlCombo.currentText()))
+                self.statusLabel.setText(f"playing {self.urlCombo.currentText()}")
             new_trackInfo = ""
             new_trackInfo = str(trackInfo)
             if len(new_trackInfo) > 200:
@@ -431,7 +388,7 @@ class MainWin(QMainWindow):
             if not new_trackInfo == "None":
                 self.statusLabel.setText(new_trackInfo)
             else:
-                self.statusLabel.setText("%s %s" % ("playing", self.urlCombo.currentText()))
+                self.statusLabel.setText(f" playing {self.urlCombo.currentText()}")
             mt = (f"Titel:{new_trackInfo}\nBeschreibung:{description}\nKommentar:: {comment}")
             if description == None:
                 mt = (f"Titel:{new_trackInfo}\nKommentar: {comment}")
@@ -450,7 +407,7 @@ class MainWin(QMainWindow):
                     self.trayIcon.setToolTip(mt)
                     self.old_meta = mt
         else:
-            self.statusLabel.setText("%s %s" % ("playing", self.urlCombo))
+            self.statusLabel.setText(f"playing {self.urlCombo}")
         
 
     def url_changed(self):
@@ -459,18 +416,13 @@ class MainWin(QMainWindow):
                 ind = self.urlCombo.currentIndex()
                 
                 image = self.imagelist[ind]
-                print("Image URL:", image)
+                print(f"Image URL: {image}")
                 response = requests.get(image)
                 data = response.content
                 pixmap = QPixmap()
                 pixmap.loadFromData(data)
                 self.er_label.setPixmap(pixmap)
                 url = self.radiolist[ind]
-                
-                if url.endswith(".m3u"):
-                    url = self.getURLfromM3U(url)
-                if url.endswith(".pls"):
-                    url = self.getURLfromPLS(url)
                 
                 self.current_station = url
                 self.player.stop()
@@ -509,22 +461,15 @@ class MainWin(QMainWindow):
             self.recordAction.setText(f"stop recording of {self.rec_name}")
             self.recordAction.setIcon(QIcon.fromTheme("media-playback-stop"))
         else:
-            self.recordAction.setText("%s %s: %s" % ("start recording", "of", self.urlCombo.currentText()))
+            self.recordAction.setText(f"start recording of {self.urlCombo.currentText()}")
             self.recordAction.setIcon(QIcon.fromTheme("media-record"))
-        self.statusLabel.setText("%s %s" % ("playing", self.urlCombo.currentText()))
+        self.statusLabel.setText(f"playing {self.urlCombo.currentText()}")
         self.setWindowTitle(self.urlCombo.currentText())   
  
     def set_running_player(self):
         self.play_btn.setEnabled(False)
         self.stop_btn.setEnabled(True)
         self.rec_btn.setEnabled(True)
- 
-    def pause_preview(self):
-        self.player.set_on_pause()
-        self.play_btn.setEnabled(True)
-        self.rec_btn.setEnabled(False)
-        self.play_btn.setFocus(True)
-        self.statusLabel.setText("Pause")
  
     def stop_preview(self):
         self.player.finish()
@@ -573,7 +518,7 @@ class MainWin(QMainWindow):
             self.saveRecord()
             self.stoprec_btn.setVisible(False)
             self.rec_btn.setVisible(True)
-            self.recordAction.setText("%s %s: %s" % ("start recording", "of", self.urlCombo.currentText()))
+            self.recordAction.setText(f"start recording of {self.urlCombo.currentText()}")
             self.recordAction.setIcon(QIcon.fromTheme("media-record"))
         else:
             self.showTrayMessage("Note", "no recording started", self.tIcon)
@@ -592,11 +537,11 @@ class MainWin(QMainWindow):
                 savefile = path
                 if QFile(savefile).exists:
                     QFile(savefile).remove()
-                print("%s %s" % ("saving", savefile))
+                print(f"saving {savefile}")
                 if not infile.copy(savefile):
                     QMessageBox.warning(self, "Error",
-                        "File %s:\n%s." % (path, infile.errorString())) 
-                print("%s %s" % ("Prozess-State: ", str(self.process.state())))
+                        f"File {path} {infile.errorString()}") 
+                print(f"Prozess-State: {str(self.process.state())}")
                 if QFile(self.outfile).exists:
                     print("exists")
                     QFile(self.outfile).remove()
@@ -604,14 +549,14 @@ class MainWin(QMainWindow):
 
     def deleteOutFile(self):
         if QFile(self.outfile).exists:
-            print("%s %s" % ("delete file", self.outfile)) 
+            print(f"delete file {self.outfile}") 
             if QFile(self.outfile).remove:
-                print("%s %s" % (self.outfile, "deleted"))  
+                print(f"{self.outfile} deleted")
             else:  
-                print("%s %s" % (self.outfile, "not deleted"))
+                print(f"{self.outfile} not deleted")
 
     def getPID(self):
-        print("%s %s" % (self.process.pid(), self.process.processId()))
+        print(f"{self.process.pid()} {self.process.processId()}")
 
  
 class RadioPlayer(QMediaPlayer):

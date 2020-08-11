@@ -8,7 +8,7 @@ from PyQt5.QtCore import (Qt, QUrl, pyqtSignal, Qt, QMimeData, QSize, QPoint, QP
 from PyQt5.QtWidgets import (QApplication, QWidget, QPushButton, QSlider, QStatusBar, 
                             QMainWindow, QFileDialog, QMenu, qApp, QAction, 
                              QVBoxLayout, QHBoxLayout, QComboBox, QLabel, QSpacerItem, QSizePolicy, 
-                            QMessageBox, QSystemTrayIcon, QInputDialog)
+                            QMessageBox, QSystemTrayIcon, QInputDialog, QSizePolicy)
 from PyQt5.QtMultimedia import QMediaPlayer, QMediaContent
 from PyQt5.QtGui import (QIcon, QPixmap)
 
@@ -34,9 +34,25 @@ class MainWin(QMainWindow):
         self.wg = QWidget()
         self.er_label = QLabel("Image")
         self.er_label.setScaledContents(False)
-        self.er_label.setFixedSize(225, 150)
+        self.er_label.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Expanding)
         self.layout = QVBoxLayout()
         self.layout.setContentsMargins(10 ,6, 10, 6)
+        
+        weblabel = QLabel()
+        weblabel.setText('<a href=\"https://exclusive.radio\"><p style="color:#c4a000">Exclusive Radio Homepage</p></a>')
+        weblabel.setTextInteractionFlags(Qt.TextBrowserInteraction)
+        weblabel.setOpenExternalLinks(True)
+        weblabel.setAlignment(Qt.AlignCenter)
+        self.layout.addWidget(weblabel) 
+        
+        ### combo box
+        self.urlCombo = QComboBox(self)
+        self.urlCombo.setFixedWidth(220)
+        self.layout.addWidget(self.urlCombo, 0, Qt.AlignCenter)
+        
+        self.er_label.setAlignment(Qt.AlignCenter)
+        self.layout.addWidget(self.er_label, 0, Qt.AlignCenter) 
+        
         self.layout1 = QHBoxLayout()
         self.tIcon = QIcon(os.path.join(os.path.dirname(sys.argv[0]), "logo.png"))
         self.headerlogo = QIcon(os.path.join(os.path.dirname(sys.argv[0]), "headerlogo.png"))
@@ -48,9 +64,7 @@ class MainWin(QMainWindow):
         self.outfile = QStandardPaths.standardLocations(QStandardPaths.TempLocation)[0] + "/er_tmp.mp3"
         self.recording_enabled = False
         self.is_recording = False
-        ### combo box
-        self.urlCombo = QComboBox(self)
-        self.urlCombo.setFixedWidth(220)
+
 
         self.play_btn = QPushButton("", self)
         self.play_btn.setFixedWidth(btnwidth)
@@ -91,11 +105,13 @@ class MainWin(QMainWindow):
         self.level_lbl = QLabel(self)
         self.level_lbl.setAlignment(Qt.AlignHCenter)
         self.level_lbl.setText("Volume 65")
-        self.layout.addWidget(self.urlCombo, 0, Qt.AlignCenter)
-        self.layout.addLayout(self.layout1)
-        self.layout.addItem(spc1)
+
+
         self.layout.addWidget(self.level_sld)
         self.layout.addWidget(self.level_lbl)
+
+        self.layout.addItem(spc1)        
+        self.layout.addLayout(self.layout1)
 
         self.player = RadioPlayer(self)
         self.player.metaDataChanged.connect(self.metaDataChanged)
@@ -123,7 +139,7 @@ class MainWin(QMainWindow):
         self.stationActs = []
 
 
-        self.setFixedSize(460, 330)
+        self.setFixedSize(400, 420)
         self.move(30, 30)
 
         # Init tray icon
@@ -154,16 +170,6 @@ class MainWin(QMainWindow):
         elif self.player.state() == QMediaPlayer.PlayingState:
             self.togglePlayerAction.setText("stop Recording")
             self.togglePlayerAction.setIcon(QIcon.fromTheme("media-playback-stop"))
-        self.er_label.setFixedHeight(150)
-        self.er_label.setAlignment(Qt.AlignCenter)
-        self.layout.addWidget(self.er_label, 0, Qt.AlignCenter)      
-  
-        weblabel = QLabel()
-        weblabel.setText('<a href=\"https://exclusive.radio\"><p style="color:#c4a000">Exclusive Radio Homepage</p></a>')
-        weblabel.setTextInteractionFlags(Qt.TextBrowserInteraction)
-        weblabel.setOpenExternalLinks(True)
-        weblabel.setAlignment(Qt.AlignCenter)
-        self.layout.addWidget(weblabel)  
         
     def showTrayMessage(self, title, message, icon, timeout = 4000):
         self.trayIcon.showMessage(title, message, icon, timeout)
@@ -171,7 +177,7 @@ class MainWin(QMainWindow):
     def handleError(self):
         print("Fehler: " + self.player.errorString())
         self.showTrayMessage("Error", self.player.errorString(), self.tIcon, 3000)
-        self.statusBar.showMessage(f"Fehler:\n{self.player.errorString()}")
+        self.statusLabel.setText(f"Fehler:\n{self.player.errorString()}")
            
     def togglePlay(self):          
         if self.togglePlayerAction.text() == "stop Recording":
@@ -231,7 +237,6 @@ class MainWin(QMainWindow):
         menuSectionIcon = QIcon(os.path.join(os.path.dirname(sys.argv[0]), "radio_bg.png"))
         self.tray_menu = QMenu()
         self.tray_menu.addAction(self.togglePlayerAction)
-        #self.tray_menu.setStyleSheet("font-size: 7pt;")
         ##### submenus from categories ##########
         b = self.radioStations.splitlines()
         for x in reversed(range(len(b))):
@@ -384,7 +389,7 @@ class MainWin(QMainWindow):
         wget = QStandardPaths.findExecutable("wget")
         if wget != "":
             print("%s %s %s" % ("found wget at ", wget, " *** recording available"))
-            self.statusBar.showMessage("Aufnahmen möglich")
+            self.statusLabel.setText("Aufnahmen möglich")
             self.showTrayMessage("Note", "found wget\nrecording available", self.tIcon)
             self.recording_enabled = True
         else:
@@ -396,10 +401,15 @@ class MainWin(QMainWindow):
         return s[:s.rfind('\n')]
 
     def createStatusBar(self):
+        self.statusLabel = QLabel("Info")
+        self.statusLabel.setWordWrap(True)
+        self.statusLabel.setAlignment(Qt.AlignCenter)
+        self.statusLabel.setStyleSheet("color:#73d216;")
         self.statusBar = QStatusBar()
         self.statusBar.setSizeGripEnabled(False)
         self.setStatusBar(self.statusBar)
-        self.statusBar.showMessage("Welcome to Exclusive Radio")
+        self.statusLabel.setText("Welcome to Exclusive Radio")
+        self.statusBar.addWidget(self.statusLabel, 1)
         pixmap = QPixmap(self.headerlogo.pixmap(64))
         statuslabel = QLabel()
         statuslabel.setMargin(3)
@@ -413,15 +423,15 @@ class MainWin(QMainWindow):
             description = (self.player.metaData("Description"))
             comment = (self.player.metaData("Comment"))
             if trackInfo is None:
-                self.statusBar.showMessage("%s %s" % ("playing", self.urlCombo.currentText()))
+                self.statusLabel.setText("%s %s" % ("playing", self.urlCombo.currentText()))
             new_trackInfo = ""
             new_trackInfo = str(trackInfo)
             if len(new_trackInfo) > 200:
                 new_trackInfo = str(new_trackInfo).partition('{"title":"')[2].partition('","')[0].replace('\n', " ")[:200]
             if not new_trackInfo == "None":
-                self.statusBar.showMessage(new_trackInfo)
+                self.statusLabel.setText(new_trackInfo)
             else:
-                self.statusBar.showMessage("%s %s" % ("playing", self.urlCombo.currentText()))
+                self.statusLabel.setText("%s %s" % ("playing", self.urlCombo.currentText()))
             mt = (f"Titel:{new_trackInfo}\nBeschreibung:{description}\nKommentar:: {comment}")
             if description == None:
                 mt = (f"Titel:{new_trackInfo}\nKommentar: {comment}")
@@ -440,7 +450,7 @@ class MainWin(QMainWindow):
                     self.trayIcon.setToolTip(mt)
                     self.old_meta = mt
         else:
-            self.statusBar.showMessage("%s %s" % ("playing", self.urlCombo))
+            self.statusLabel.setText("%s %s" % ("playing", self.urlCombo))
         
 
     def url_changed(self):
@@ -456,7 +466,6 @@ class MainWin(QMainWindow):
                 pixmap.loadFromData(data)
                 self.er_label.setPixmap(pixmap)
                 url = self.radiolist[ind]
-                #print(url)
                 
                 if url.endswith(".m3u"):
                     url = self.getURLfromM3U(url)
@@ -502,7 +511,7 @@ class MainWin(QMainWindow):
         else:
             self.recordAction.setText("%s %s: %s" % ("start recording", "of", self.urlCombo.currentText()))
             self.recordAction.setIcon(QIcon.fromTheme("media-record"))
-        self.statusBar.showMessage("%s %s" % ("playing", self.urlCombo.currentText()))
+        self.statusLabel.setText("%s %s" % ("playing", self.urlCombo.currentText()))
         self.setWindowTitle(self.urlCombo.currentText())   
  
     def set_running_player(self):
@@ -515,14 +524,14 @@ class MainWin(QMainWindow):
         self.play_btn.setEnabled(True)
         self.rec_btn.setEnabled(False)
         self.play_btn.setFocus(True)
-        self.statusBar.showMessage("Pause")
+        self.statusLabel.setText("Pause")
  
     def stop_preview(self):
         self.player.finish()
         self.play_btn.setEnabled(True)
         self.stop_btn.setEnabled(False)
         self.rec_btn.setEnabled(False)
-        self.statusBar.showMessage("stopped")
+        self.statusLabel.setText("stopped")
         self.togglePlayerAction.setText("start Player")
         self.togglePlayerAction.setIcon(QIcon.fromTheme("media-playback-start"))
 
@@ -686,6 +695,10 @@ color: #73d216;
 font-size: 8pt;
 background: transparent;
 }
+QStatusBar::item 
+{
+border: none;
+} 
 QLabel
 {
 border: 0px;

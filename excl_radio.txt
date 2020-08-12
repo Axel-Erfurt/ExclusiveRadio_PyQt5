@@ -96,6 +96,7 @@ The Weeknd,http://streaming.exclusive.radio/er/theweeknd/icecast.audio,https://e
 Tinie Tempah,http://streaming.exclusive.radio/er/tinietempah/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/05/Tinie-Tempah-4-300x169.jpg
 Travis Scott,http://streaming.exclusive.radio/er/travisscott/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/07/Travis-Scott-3-300x225.jpg
 Twenty One Pilots,http://streaming.exclusive.radio/er/twentyonepilots/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/06/Twenty-One-Pilots-1-300x164.jpg
+2020's,http://streaming.exclusive.radio/er/2020/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/06/2020-300x201.jpg
 -- Exclusive Radio Folk --
 Irish Folk,http://streaming.exclusive.radio/er/irishfolk/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/06/IRISH-FOLK-300x300.png
 Ben Harper,http://streaming.exclusive.radio/er/benharper/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/07/Ben-Harper-300x166.jpg
@@ -234,6 +235,8 @@ Whitney Houston,http://streaming.exclusive.radio/er/whitneyhouston/icecast.audio
 70's,http://streaming.exclusive.radio/er/70s/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2019/09/70s-300x200.jpg
 80's,http://streaming.exclusive.radio/er/80s/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2019/09/80s-e1568129110673-300x200.jpg
 90's,http://streaming.exclusive.radio/er/90s/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2019/09/90s-e1568129532760-300x200.jpg
+00's,http://streaming.exclusive.radio/er/00s/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2019/09/passion-for-music-picture-id497152582-1-1024x512-1024x512-e1568128335691-300x200.jpg
+2010's,http://streaming.exclusive.radio/er/10s/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2019/09/2010sbanner-e1568129354917-300x200.jpg
 -- Exclusive Radio Rock --
 AC/DC,http://streaming.exclusive.radio/er/acdc/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2019/09/AC-DC-1-e1568102483796-300x200.jpg
 Aerosmith,http://streaming.exclusive.radio/er/aerosmith/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/02/Aerosmith-300x169.jpg
@@ -262,6 +265,7 @@ Thin Lizzy,http://streaming.exclusive.radio/er/thinlizzy/icecast.audio,https://e
 U2,http://streaming.exclusive.radio/er/u2/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2019/09/U2-1-300x200.jpg
 Van Halen,http://streaming.exclusive.radio/er/vanhalen/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/06/Van-Halen-3-300x200.jpg
 Whitesnake,http://streaming.exclusive.radio/er/whitesnake/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/07/Whitesnake-1-300x214.jpg
+ZZ Top,http://streaming.exclusive.radio/er/zztop/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/06/ZZ-Top-2-300x168.jpg
 -- Exclusive Radio Soul and Motown --
 Al Green,http://streaming.exclusive.radio/er/algreen/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/05/Al-Green-1-300x163.jpg
 Aretha Franklin,http://streaming.exclusive.radio/er/arethafranklin/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/05/Aretha-Franklin-1-300x169.jpg

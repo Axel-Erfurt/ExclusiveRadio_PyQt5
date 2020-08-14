@@ -3,14 +3,14 @@
 import os
 import sys
 import requests
-from PyQt5.QtCore import (Qt, QUrl, pyqtSignal, Qt, QMimeData, QSize, QPoint, QProcess, 
+from PyQt5.QtCore import (Qt, QUrl, pyqtSignal, Qt, QMimeData, QSize, QPoint, QProcess, QObject, 
                             QStandardPaths, QFile, QDir, QSettings, QEvent, QByteArray)
 from PyQt5.QtWidgets import (QApplication, QWidget, QPushButton, QSlider, QStatusBar, 
                             QMainWindow, QFileDialog, QMenu, qApp, QAction, QToolBar, QToolButton, 
                              QVBoxLayout, QHBoxLayout, QComboBox, QLabel, QSpacerItem, QSizePolicy, 
                             QMessageBox, QSystemTrayIcon, QInputDialog, QSizePolicy)
 from PyQt5.QtMultimedia import QMediaPlayer, QMediaContent
-from PyQt5.QtGui import (QIcon, QPixmap)
+from PyQt5.QtGui import (QIcon, QPixmap, QDesktopServices)
 
 changed = pyqtSignal(QMimeData)
 btnwidth = 48
@@ -31,18 +31,18 @@ class MainWin(QMainWindow):
         self.rec_url = ""
         self.old_meta = ""
         self.notificationsEnabled = True
+        
+        self.setContentsMargins(5 ,0, 5, 0)
+        
         self.wg = QWidget()
         self.er_label = QLabel("Image")
         self.er_label.setScaledContents(False)
-        self.er_label.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Expanding)
+        self.er_label.setSizePolicy(QSizePolicy.Minimum, QSizePolicy.Minimum)
         self.layout = QVBoxLayout()
 
-        #self.layout.setSpacing(0)
         
         ### combo box
-        self.urlCombo = QComboBox(self)
-        self.urlCombo.setFixedWidth(220)
-        #self.layout.addWidget(self.urlCombo, 0, Qt.AlignCenter)
+        self.urlCombo = QComboBox()
         
         self.er_label.setAlignment(Qt.AlignCenter)
         self.layout.addWidget(self.er_label, 0, Qt.AlignCenter) 
@@ -62,7 +62,6 @@ class MainWin(QMainWindow):
         
         spc1 = QSpacerItem(6, 10, QSizePolicy.Expanding, QSizePolicy.Maximum)
         
-        #self.layout.addItem(spc2) 
         self.play_btn = QPushButton("", self)
         self.play_btn.setFixedWidth(btnwidth)
         self.play_btn.setIcon(self.playIcon)
@@ -95,7 +94,8 @@ class MainWin(QMainWindow):
         self.layout1.addWidget(self.hide_btn)        
         
         self.level_sld = QSlider(self)
-        #self.level_sld.setFixedWidth(300)
+        self.level_sld.setFixedWidth(310)
+        self.level_sld.setToolTip("Volume Slider")
         self.level_sld.setTickPosition(1)
         self.level_sld.setOrientation(Qt.Horizontal)
         self.level_sld.setValue(65)
@@ -136,7 +136,7 @@ class MainWin(QMainWindow):
         self.stationActs = []
 
         self.layout.addItem(spc1)
-        self.setFixedSize(400, 350)
+        self.setFixedSize(340, 360)
         self.move(30, 30)
 
         # Init tray icon
@@ -231,17 +231,7 @@ class MainWin(QMainWindow):
         self.tb.addWidget(toolButton)
         
         empty = QWidget()
-        #empty.setFixedWidth(40)
         self.tb.addWidget(empty) 
-        weblabel = QLabel()
-        weblabel.setText('<a href=\"https://exclusive.radio\"><p style="color:#c4a000">Exclusive Radio Homepage</p></a>')
-        weblabel.setTextInteractionFlags(Qt.TextBrowserInteraction)
-        weblabel.setOpenExternalLinks(True)
-        weblabel.setAlignment(Qt.AlignCenter)
-        spacer = QWidget()
-        spacer.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-        self.tb.addWidget(spacer)
-        self.tb.addWidget(weblabel) 
         self.tb.setContextMenuPolicy(Qt.PreventContextMenu)
         self.tb.setMovable(False)
         self.tb.setAllowedAreas(Qt.TopToolBarArea)
@@ -434,11 +424,18 @@ class MainWin(QMainWindow):
         self.setStatusBar(self.statusBar)
         self.statusLabel.setText("Welcome to Exclusive Radio")
         self.statusBar.addWidget(self.statusLabel, 1)
-        pixmap = QPixmap(self.headerlogo.pixmap(64))
-        statuslabel = QLabel()
-        statuslabel.setMargin(3)
-        statuslabel.setPixmap(pixmap)
-        self.statusBar.addPermanentWidget(statuslabel)
+        pixmap = QIcon(self.headerlogo)
+        self.home_label = QPushButton()
+        self.home_label.setIconSize(QSize(26,26))
+        self.home_label.setFixedSize(32, 32)
+        self.home_label.setToolTip("vist Exclusive Radio Homepage")
+        self.home_label.setIcon(self.tIcon)
+        self.home_label.clicked.connect(self.showHomepage)
+        self.statusBar.addPermanentWidget(self.home_label)
+        
+    def showHomepage(self):
+        url = QUrl('https://exclusive.radio')
+        QDesktopServices.openUrl(url)
 
         
     def metaDataChanged(self):
@@ -730,26 +727,28 @@ background: #2e3436;
 QSlider::handle:horizontal 
 {
 background: transparent;
-width: 18px;
+width: 8px;
+height: 8px;
+border-radius: 4px;
 }
 
 QSlider::groove:horizontal {
-border: 1px solid #555753;;
-height: 4px;
+border: 1px solid #c4a000;;
+height: 8px;
 background: #2e4d25;
 border-radius: 0px;
 }
 QSlider::sub-page:horizontal {
 background: #685c1b;
-border: 0px solid #c4a000;
-height: 4px;
+border: 1px solid #c4a000;
+height: 6px;
 border-radius: 0px;
 }
 QSlider::handle:horizontal:hover {
 background: #73d216;
-border-radius: 0px;
+border-radius: 4px;
 height: 6px;
-width: 14px;
+width: 8px;
 }
 
 QSlider::sub-page:horizontal:disabled {

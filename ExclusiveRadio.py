@@ -6,7 +6,7 @@ import requests
 from PyQt5.QtCore import (Qt, QUrl, pyqtSignal, Qt, QMimeData, QSize, QPoint, QProcess, 
                             QStandardPaths, QFile, QDir, QSettings, QEvent, QByteArray)
 from PyQt5.QtWidgets import (QApplication, QWidget, QPushButton, QSlider, QStatusBar, 
-                            QMainWindow, QFileDialog, QMenu, qApp, QAction, 
+                            QMainWindow, QFileDialog, QMenu, qApp, QAction, QToolBar, QToolButton, 
                              QVBoxLayout, QHBoxLayout, QComboBox, QLabel, QSpacerItem, QSizePolicy, 
                             QMessageBox, QSystemTrayIcon, QInputDialog, QSizePolicy)
 from PyQt5.QtMultimedia import QMediaPlayer, QMediaContent
@@ -36,24 +36,19 @@ class MainWin(QMainWindow):
         self.er_label.setScaledContents(False)
         self.er_label.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Expanding)
         self.layout = QVBoxLayout()
-        self.layout.setContentsMargins(10 ,6, 10, 6)
-        
-        weblabel = QLabel()
-        weblabel.setText('<a href=\"https://exclusive.radio\"><p style="color:#c4a000">Exclusive Radio Homepage</p></a>')
-        weblabel.setTextInteractionFlags(Qt.TextBrowserInteraction)
-        weblabel.setOpenExternalLinks(True)
-        weblabel.setAlignment(Qt.AlignCenter)
-        self.layout.addWidget(weblabel) 
+
+        #self.layout.setSpacing(0)
         
         ### combo box
         self.urlCombo = QComboBox(self)
         self.urlCombo.setFixedWidth(220)
-        self.layout.addWidget(self.urlCombo, 0, Qt.AlignCenter)
+        #self.layout.addWidget(self.urlCombo, 0, Qt.AlignCenter)
         
         self.er_label.setAlignment(Qt.AlignCenter)
         self.layout.addWidget(self.er_label, 0, Qt.AlignCenter) 
         
         self.layout1 = QHBoxLayout()
+        self.layout1.setContentsMargins(50 ,0, 50, 0)
         self.tIcon = QIcon(os.path.join(os.path.dirname(sys.argv[0]), "logo.png"))
         self.headerlogo = QIcon(os.path.join(os.path.dirname(sys.argv[0]), "headerlogo.png"))
         self.playIcon = QIcon(os.path.join(os.path.dirname(sys.argv[0]), "media-playback-start.svg"))
@@ -64,8 +59,10 @@ class MainWin(QMainWindow):
         self.outfile = QStandardPaths.standardLocations(QStandardPaths.TempLocation)[0] + "/er_tmp.mp3"
         self.recording_enabled = False
         self.is_recording = False
-
-
+        
+        spc1 = QSpacerItem(6, 10, QSizePolicy.Expanding, QSizePolicy.Maximum)
+        
+        #self.layout.addItem(spc2) 
         self.play_btn = QPushButton("", self)
         self.play_btn.setFixedWidth(btnwidth)
         self.play_btn.setIcon(self.playIcon)
@@ -97,20 +94,20 @@ class MainWin(QMainWindow):
         self.hide_btn.clicked.connect(self.showMain)
         self.layout1.addWidget(self.hide_btn)        
         
-        spc1 = QSpacerItem(6, 10, QSizePolicy.Expanding, QSizePolicy.Maximum)
         self.level_sld = QSlider(self)
+        #self.level_sld.setFixedWidth(300)
         self.level_sld.setTickPosition(1)
         self.level_sld.setOrientation(Qt.Horizontal)
         self.level_sld.setValue(65)
         self.level_lbl = QLabel(self)
         self.level_lbl.setAlignment(Qt.AlignHCenter)
         self.level_lbl.setText("Volume 65")
+        self.layout.addItem(spc1)
 
-
-        self.layout.addWidget(self.level_sld)
-        self.layout.addWidget(self.level_lbl)
-
-        self.layout.addItem(spc1)        
+        self.layout.addWidget(self.level_sld, Qt.AlignCenter)
+        self.layout.addWidget(self.level_lbl, Qt.AlignCenter)
+        self.layout.addItem(spc1)
+       
         self.layout.addLayout(self.layout1)
 
         self.player = RadioPlayer(self)
@@ -138,8 +135,8 @@ class MainWin(QMainWindow):
         self.setWindowIcon(self.tIcon)
         self.stationActs = []
 
-
-        self.setFixedSize(400, 420)
+        self.layout.addItem(spc1)
+        self.setFixedSize(400, 350)
         self.move(30, 30)
 
         # Init tray icon
@@ -152,7 +149,7 @@ class MainWin(QMainWindow):
         self.geo = self.geometry()
         self.showWinAction = QAction(QIcon.fromTheme("view-restore"), "show Main Window", triggered = self.showMain)
         self.notifAction = QAction(QIcon.fromTheme("dialog-information"), "disable Tray Messages", triggered = self.toggleNotif)
-        self.togglePlayerAction = QAction("stop Recording", triggered = self.togglePlay)
+        self.togglePlayerAction = QAction("stop Player", triggered = self.togglePlay)
         self.togglePlayerAction.setIcon(QIcon.fromTheme("media-playback-stop"))
         self.recordAction = QAction(QIcon.fromTheme("media-record"), "record channel", triggered = self.recordRadio)
         self.stopRecordAction = QAction(QIcon.fromTheme("media-playback-stop"), "stop Recording", 
@@ -160,6 +157,8 @@ class MainWin(QMainWindow):
         self.findExecutable()
         self.readSettings()
         self.makeTrayMenu()
+        self.createWindowMenu()
+        
         if QSystemTrayIcon.isSystemTrayAvailable():
             print("System Tray Icon available")
         else:
@@ -168,7 +167,7 @@ class MainWin(QMainWindow):
             self.togglePlayerAction.setText("start Player")
             self.togglePlayerAction.setIcon(QIcon.fromTheme("media-playback-start"))            
         elif self.player.state() == QMediaPlayer.PlayingState:
-            self.togglePlayerAction.setText("stop Recording")
+            self.togglePlayerAction.setText("stop Player")
             self.togglePlayerAction.setIcon(QIcon.fromTheme("media-playback-stop"))
         
     def showTrayMessage(self, title, message, icon, timeout = 4000):
@@ -180,7 +179,7 @@ class MainWin(QMainWindow):
         self.statusLabel.setText(f"Fehler:\n{self.player.errorString()}")
            
     def togglePlay(self):          
-        if self.togglePlayerAction.text() == "stop Recording":
+        if self.togglePlayerAction.text() == "stop Player":
             self.stop_preview()
             self.togglePlayerAction.setText("start Player")
             self.togglePlayerAction.setIcon(QIcon.fromTheme("media-playback-start"))
@@ -188,6 +187,64 @@ class MainWin(QMainWindow):
             self.playRadioStation()
             self.togglePlayerAction.setText("stop Recording")
             self.togglePlayerAction.setIcon(QIcon.fromTheme("media-playback-stop"))
+            
+    def createWindowMenu(self):
+        self.tb = self.addToolBar("Menu")
+        self.tb_menu = QMenu()
+        self.tb.setIconSize(QSize(20, 20))
+        
+        ##### submenus from categories ##########
+        b = self.radioStations.splitlines()
+        for x in reversed(range(len(b))):
+            line = b[x]
+            if line == "":
+                print(f"empty line {x} removed")
+                del(b[x])
+               
+        i = 0
+        for x in range(0, len(b)):
+            line = b[x]
+            while True:
+                if line.startswith("--"):
+                    chm = self.tb_menu.addMenu(line.replace("-- ", "").replace(" --", ""))
+                    chm.setIcon(self.tIcon)
+                    break
+                    continue
+
+                elif not line.startswith("--"):
+                    menu_line = line.split(",")
+                    ch = menu_line[0]
+                    data = menu_line[1]
+                    if len(menu_line) > 2:
+                        image = menu_line[2]
+                    chm.addAction(self.stationActs[i])
+                    i += 1
+                    break
+        ####################################
+        toolButton = QToolButton()
+        toolButton.setIcon(self.tIcon)
+        toolButton.setToolButtonStyle(Qt.ToolButtonTextBesideIcon)
+        toolButton.setText("   Channels")
+        toolButton.setFixedWidth(100)
+        toolButton.setMenu(self.tb_menu)
+        toolButton.setPopupMode(QToolButton.InstantPopup)
+        self.tb.addWidget(toolButton)
+        
+        empty = QWidget()
+        #empty.setFixedWidth(40)
+        self.tb.addWidget(empty) 
+        weblabel = QLabel()
+        weblabel.setText('<a href=\"https://exclusive.radio\"><p style="color:#c4a000">Exclusive Radio Homepage</p></a>')
+        weblabel.setTextInteractionFlags(Qt.TextBrowserInteraction)
+        weblabel.setOpenExternalLinks(True)
+        weblabel.setAlignment(Qt.AlignCenter)
+        spacer = QWidget()
+        spacer.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        self.tb.addWidget(spacer)
+        self.tb.addWidget(weblabel) 
+        self.tb.setContextMenuPolicy(Qt.PreventContextMenu)
+        self.tb.setMovable(False)
+        self.tb.setAllowedAreas(Qt.TopToolBarArea)
         
     def makeTrayMenu(self):
         self.stationActs = []
@@ -422,11 +479,11 @@ class MainWin(QMainWindow):
                 name = self.urlCombo.currentText()
                 print(f"playing {name} from {url}")
                 self.playRadioStation()
-                if self.togglePlayerAction.text() == "stop Recording":
+                if self.togglePlayerAction.text() == "stop Player":
                     self.togglePlayerAction.setText("start Player")
                     self.togglePlayerAction.setIcon(QIcon.fromTheme("media-playback-start"))
                 else:
-                    self.togglePlayerAction.setText("stop Recording")
+                    self.togglePlayerAction.setText("stop Player")
                     self.togglePlayerAction.setIcon(QIcon.fromTheme("media-playback-stop"))
             else:
                 self.rec_btn.setVisible(False)
@@ -600,6 +657,23 @@ class RadioPlayer(QMediaPlayer):
 
 def mystylesheet(self):
     return """
+QToolBar
+{
+height: 20px;
+background: #2e3436;
+color: #73d216;
+font-size: 8pt;
+}
+QToolButton
+{
+background: #2e3436;
+color:#8ae234;
+}
+QToolButton::item
+{
+background: #2e3436;
+color:#8ae234;
+}
 QPushButton
 {
 background: #2e3436;

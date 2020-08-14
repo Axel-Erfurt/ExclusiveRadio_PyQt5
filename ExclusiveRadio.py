@@ -145,7 +145,7 @@ class MainWin(QMainWindow):
         self.trayIcon = QSystemTrayIcon()
         self.trayIcon.setIcon(trayIcon)
         self.trayIcon.show()
-                        
+        self.trayIcon.activated.connect(self.showMainfromTray)                
         self.geo = self.geometry()
         self.showWinAction = QAction(QIcon.fromTheme("view-restore"), "show Main Window", triggered = self.showMain)
         self.notifAction = QAction(QIcon.fromTheme("dialog-information"), "disable Tray Messages", triggered = self.toggleNotif)
@@ -298,12 +298,22 @@ class MainWin(QMainWindow):
         self.trayIcon.setContextMenu(self.tray_menu)
 
     def showMain(self):
-        if self.isVisible() ==False:
+        if self.isVisible() == False:
             self.showWinAction.setText("hide Main Window")
             self.setVisible(True)
-        elif self.isVisible() ==True:
+        elif self.isVisible() == True:
             self.showWinAction.setText("show Main Window")
             self.setVisible(False)
+            
+    def showMainfromTray(self):
+        buttons = qApp.mouseButtons()
+        if buttons == Qt.LeftButton:
+            if self.isVisible() == False:
+                self.showWinAction.setText("hide Main Window")
+                self.setVisible(True)
+            elif self.isVisible() == True:
+                self.showWinAction.setText("show Main Window")
+                self.setVisible(False)
             
     def toggleNotif(self):
         if self.notifAction.text() == "disable Tray Messages":
@@ -439,7 +449,7 @@ class MainWin(QMainWindow):
             new_trackInfo = ""
             new_trackInfo = str(trackInfo)
             if not new_trackInfo == "None":
-                self.statusLabel.setText(new_trackInfo)
+                self.statusLabel.setText(f"{new_trackInfo.split(' - ')[0]}\n{new_trackInfo.split(' - ')[1]}")
             else:
                 self.statusLabel.setText(f" playing {self.urlCombo.currentText()}")
             mt = new_trackInfo
@@ -447,7 +457,7 @@ class MainWin(QMainWindow):
                 if self.notificationsEnabled:
                     if not mt == self.old_meta:
                         print(mt)
-                        self.showTrayMessage("Exclusive Radio", mt, self.tIcon)
+                        self.showTrayMessage("Exclusive Radio", f"{mt.split(' - ')[0]}\n{mt.split(' - ')[1]}", self.tIcon)
                         self.old_meta = mt
                     self.trayIcon.setToolTip(mt)
                 else:

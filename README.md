@@ -3,7 +3,7 @@ ExclusiveRadio Tray App for Ubuntu/Mint
 
 play and record [Exclusive Radio](https://exclusive.radio), a Web Radio with 499 Channels. New ones are constantly being added.
 
-![alt text](https://github.com/Axel-Erfurt/ExclusiveRadio_PyQt5/blob/master/screenshot.png)
+![alt text](https://github.com/Axel-Erfurt/ExclusiveRadio_PyQt5/blob/master/screenshot_new.png)
 
 __Requirements:__
 - python3

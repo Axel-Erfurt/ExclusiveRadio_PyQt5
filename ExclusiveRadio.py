@@ -176,7 +176,7 @@ class MainWin(QMainWindow):
             
     def handleError(self):
         print(f"Fehler: {self.player.errorString()}")
-        self.showTrayMessage("Error", self.player.errorString(), self.tIcon, 3000)
+        self.showTrayMessage(f"Error:\n{self.player.errorString()}", self.tIcon, 3000)
         self.statusLabel.setText(f"Fehler:\n{self.player.errorString()}")
            
     def togglePlay(self):          
@@ -377,25 +377,15 @@ class MainWin(QMainWindow):
     def metaDataChanged(self):
         if self.player.isMetaDataAvailable():
             trackInfo = (self.player.metaData("Title"))
-            description = (self.player.metaData("Description"))
-            comment = (self.player.metaData("Comment"))
             if trackInfo is None:
                 self.statusLabel.setText(f"playing {self.urlCombo.currentText()}")
             new_trackInfo = ""
             new_trackInfo = str(trackInfo)
-            if len(new_trackInfo) > 200:
-                new_trackInfo = str(new_trackInfo).partition('{"title":"')[2].partition('","')[0].replace('\n', " ")[:200]
             if not new_trackInfo == "None":
                 self.statusLabel.setText(new_trackInfo)
             else:
                 self.statusLabel.setText(f" playing {self.urlCombo.currentText()}")
-            mt = (f"Titel:{new_trackInfo}\nBeschreibung:{description}\nKommentar:: {comment}")
-            if description == None:
-                mt = (f"Titel:{new_trackInfo}\nKommentar: {comment}")
-            if comment == None:
-                mt = (f"Titel:{new_trackInfo}\nKommentar: {description}")
-            if description == None and comment == None:
-                mt = (f"{new_trackInfo}")
+            mt = new_trackInfo
             if not mt == "None":
                 if self.notificationsEnabled:
                     if not mt == self.old_meta:
@@ -529,18 +519,17 @@ class MainWin(QMainWindow):
             musicfolder = QStandardPaths.standardLocations(QStandardPaths.MusicLocation)[0]
             recname = self.rec_name.replace("-", " ").replace(" - ", " ") + ".mp3"
             infile = QFile(self.outfile)
-            path, _ = QFileDialog.getSaveFileName(
+            savefile, _ = QFileDialog.getSaveFileName(
                                     None, "Save as...", 
                                     f'{musicfolder}/{recname}',
                                     "Audio (*.mp3)")
-            if (path != ""):
-                savefile = path
+            if (savefile != ""):
                 if QFile(savefile).exists:
                     QFile(savefile).remove()
                 print(f"saving {savefile}")
                 if not infile.copy(savefile):
                     QMessageBox.warning(self, "Error",
-                        f"File {path} {infile.errorString()}") 
+                        f"File {savefile} {infile.errorString()}") 
                 print(f"Prozess-State: {str(self.process.state())}")
                 if QFile(self.outfile).exists:
                     print("exists")

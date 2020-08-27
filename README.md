@@ -13,6 +13,10 @@ __Requirements:__
 ## Usage ##
 > python3 ExclusiveRadio.py
 
+or for german Version
+
+> python3 ExclusiveRadioD.py
+
 It is operated via the context menu of the tray icon or the main window.
 
 - right click on systray icon -> category -> select channel

@@ -3,12 +3,12 @@
 import os
 import sys
 import requests
-from PyQt5.QtCore import (Qt, QUrl, pyqtSignal, Qt, QMimeData, QSize, QPoint, QProcess, QObject, 
-                            QStandardPaths, QFile, QDir, QSettings, QEvent, QByteArray)
+from PyQt5.QtCore import (QUrl, pyqtSignal, Qt, QMimeData, QSize, QPoint, QProcess, 
+                            QStandardPaths, QFile, QSettings)
 from PyQt5.QtWidgets import (QApplication, QWidget, QPushButton, QSlider, QStatusBar, 
-                            QMainWindow, QFileDialog, QMenu, qApp, QAction, QToolBar, QToolButton, 
+                            QMainWindow, QFileDialog, QMenu, qApp, QAction, QToolButton, 
                              QVBoxLayout, QHBoxLayout, QComboBox, QLabel, QSpacerItem, QSizePolicy, 
-                            QMessageBox, QSystemTrayIcon, QInputDialog, QSizePolicy)
+                            QMessageBox, QSystemTrayIcon)
 from PyQt5.QtMultimedia import QMediaPlayer, QMediaContent
 from PyQt5.QtGui import (QIcon, QPixmap, QDesktopServices)
 
@@ -191,7 +191,7 @@ class MainWin(QMainWindow):
     def createWindowMenu(self):
         self.tb = self.addToolBar("Menu")
         self.tb_menu = QMenu()
-        self.tb.setIconSize(QSize(20, 20))
+        self.tb.setIconSize(QSize(66, 30))
         
         ##### submenus from categories ##########
         b = self.radioStations.splitlines()
@@ -212,20 +212,15 @@ class MainWin(QMainWindow):
                     continue
 
                 elif not line.startswith("--"):
-                    menu_line = line.split(",")
-                    ch = menu_line[0]
-                    data = menu_line[1]
-                    if len(menu_line) > 2:
-                        image = menu_line[2]
                     chm.addAction(self.stationActs[i])
                     i += 1
                     break
         ####################################
         toolButton = QToolButton()
-        toolButton.setIcon(self.tIcon)
+        toolButton.setIcon(self.headerlogo)
         toolButton.setToolButtonStyle(Qt.ToolButtonTextBesideIcon)
         toolButton.setText("   Channels")
-        toolButton.setFixedWidth(100)
+        toolButton.setFixedWidth(180)
         toolButton.setMenu(self.tb_menu)
         toolButton.setPopupMode(QToolButton.InstantPopup)
         self.tb.addWidget(toolButton)
@@ -238,7 +233,6 @@ class MainWin(QMainWindow):
         
     def makeTrayMenu(self):
         self.stationActs = []
-        menuSectionIcon = QIcon(os.path.join(os.path.dirname(sys.argv[0]), "radio_bg.png"))
         self.tray_menu = QMenu()
         self.tray_menu.addAction(self.togglePlayerAction)
         ##### submenus from categories ##########
@@ -262,9 +256,6 @@ class MainWin(QMainWindow):
                 elif not line.startswith("--"):
                     menu_line = line.split(",")
                     ch = menu_line[0]
-                    data = menu_line[1]
-                    if len(menu_line) > 2:
-                        image = menu_line[2]
                     self.stationActs.append(QAction(self.tIcon, ch, triggered = self.openTrayStation))
                     self.stationActs[i].setData(str(i))
                     chm.addAction(self.stationActs[i])
@@ -381,7 +372,6 @@ class MainWin(QMainWindow):
         self.settings.sync()
 
     def readStations(self):
-        menuSectionIcon = QIcon(os.path.join(os.path.dirname(sys.argv[0]), "radio_bg.png"))
         self.urlCombo.clear()
         self.radiolist = []
         self.channels = []
@@ -391,13 +381,13 @@ class MainWin(QMainWindow):
         with open(self.radiofile, 'r') as f:
             self.radioStations = f.read()
             f.close()
-            newlist = [list(x) for x in self.radioStations.splitlines()]
             for lines in self.radioStations.splitlines():
                 mLine = lines.split(",")
-                if not mLine[0].startswith("--"):
-                    self.urlCombo.addItem(self.tIcon, mLine[0],Qt.UserRole - 1)
-                    self.radiolist.append(mLine[1])
-                    self.imagelist.append(mLine[2])          
+                if len(mLine) > 2:
+                    if not mLine[0].startswith("--"):
+                        self.urlCombo.addItem(self.tIcon, mLine[0],Qt.UserRole - 1)
+                        self.radiolist.append(mLine[1])
+                        self.imagelist.append(mLine[2])                   
 
     def findExecutable(self):
         wget = QStandardPaths.findExecutable("wget")
@@ -424,7 +414,6 @@ class MainWin(QMainWindow):
         self.setStatusBar(self.statusBar)
         self.statusLabel.setText("Welcome to Exclusive Radio")
         self.statusBar.addWidget(self.statusLabel, 1)
-        pixmap = QIcon(self.headerlogo)
         self.home_label = QPushButton()
         self.home_label.setIconSize(QSize(26,26))
         self.home_label.setFixedSize(32, 32)
@@ -543,7 +532,7 @@ class MainWin(QMainWindow):
     def update_volume_slider(self, level):
         self.level_lbl.setText("Volume " + str(level))
         self.level_sld.blockSignals(True)
-        self.level_sld.setValue(value)
+        self.level_sld.setValue(level)
         self.level_lbl.setText("Volume " + str(level))
         self.level_sld.blockSignals(False)
 

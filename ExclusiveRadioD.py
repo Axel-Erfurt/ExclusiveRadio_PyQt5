@@ -421,10 +421,11 @@ class MainWin(QMainWindow):
             f.close()
             for lines in self.radioStations.splitlines():
                 mLine = lines.split(",")
-                if not mLine[0].startswith("--"):
-                    self.urlCombo.addItem(self.tIcon, mLine[0],Qt.UserRole - 1)
-                    self.radiolist.append(mLine[1])
-                    self.imagelist.append(mLine[2])          
+                if len(mLine) > 2:
+                    if not mLine[0].startswith("--"):
+                        self.urlCombo.addItem(self.tIcon, mLine[0],Qt.UserRole - 1)
+                        self.radiolist.append(mLine[1])
+                        self.imagelist.append(mLine[2])          
 
     def findExecutable(self):
         wget = QStandardPaths.findExecutable("wget")

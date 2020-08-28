@@ -28,7 +28,7 @@ def getValues():
         else:
             genre = line.get('_embedded')['wp:term'][0][1]['name']
         genre = genre.replace('Trending -The latest stations added to Exclusive Radio', 'New Station')
-        image = line.get('x_featured_media')
+        image = line.get('x_featured_media_medium')
         line = f'{name},{url},{genre},{image}'
         theList.append(line)
         genreList.append(genre)
@@ -49,13 +49,13 @@ def makeList(): ### Radio List
     return('\n'.join(result))
 
 
-for x in range(1, 6):
+for x in range(1, 9):
     url = f"https://exclusive.radio/app//wp-json/wp/v2/stations/?page={x}&orderby=title&order=asc&_embed=true&per_page=99&search=&station_category=19"
     r = requests.get(url)
-
-    ### to json 
-    data = r.json() 
-    theList.append('\n'.join(getValues()))
+    if r:
+        ### to json 
+        data = r.json() 
+        theList.append('\n'.join(getValues()))
 
 
 result = makeList()
@@ -64,3 +64,4 @@ print(result)
 
 with open('/tmp/excl_radio.txt', 'w', encoding='utf8') as f:
     f.write(result) 
+    

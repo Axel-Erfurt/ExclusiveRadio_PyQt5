@@ -17,6 +17,10 @@ or for german Version
 
 > python3 ExclusiveRadioD.py
 
+or version without Tray icon
+
+> python3 ExclusiveRadioPlayer.py
+
 It is operated via the context menu of the tray icon or the main window.
 
 - right click on systray icon -> category -> select channel

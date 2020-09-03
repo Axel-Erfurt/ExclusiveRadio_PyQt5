@@ -13,6 +13,7 @@ from PyQt5.QtWidgets import (QApplication, QWidget, QPushButton, QSlider, QStatu
                             
 from PyQt5.QtMultimedia import QMediaPlayer, QMediaContent
 from PyQt5.QtGui import (QIcon, QPixmap, QDesktopServices)
+import exclusive_radio_api_get_D
 
 changed = pyqtSignal(QMimeData)
 btnwidth = 48
@@ -230,6 +231,9 @@ class MainWin(QMainWindow):
         self.tb = self.addToolBar("Menu")
         self.tb_menu = QMenu()
         self.tb.setIconSize(QSize(66, 30))
+        self.tb.setContextMenuPolicy(Qt.PreventContextMenu)
+        self.tb.setMovable(False)
+        self.tb.setAllowedAreas(Qt.TopToolBarArea)
         
         ##### submenus from categories ##########
         b = self.radioStations.splitlines()
@@ -264,10 +268,15 @@ class MainWin(QMainWindow):
         self.tb.addWidget(toolButton)
         
         empty = QWidget()
+        empty.setFixedWidth(62)
         self.tb.addWidget(empty) 
-        self.tb.setContextMenuPolicy(Qt.PreventContextMenu)
-        self.tb.setMovable(False)
-        self.tb.setAllowedAreas(Qt.TopToolBarArea)
+
+        updateButton = QToolButton()
+        updateButton.setText("Update")
+        updateButton.setToolTip("Update der Stationen")
+        updateButton.setFixedWidth(70)
+        self.tb.addWidget(updateButton)        
+        updateButton.clicked.connect(self.updateChannels)     
         
     def makeTrayMenu(self):
         self.stationActs = []
@@ -312,9 +321,20 @@ class MainWin(QMainWindow):
         self.tray_menu.addSeparator()
         self.tray_menu.addAction(self.notifAction)
         self.tray_menu.addSeparator()
+        updateAction = self.tray_menu.addAction(QIcon.fromTheme("system-update"), "Update der Stationen")
+        updateAction.triggered.connect(self.updateChannels)
+        self.tray_menu.addSeparator()
         exitAction = self.tray_menu.addAction(QIcon.fromTheme("application-exit"), "Exit")
         exitAction.triggered.connect(self.exitApp)
         self.trayIcon.setContextMenu(self.tray_menu)
+        
+    def updateChannels(self):
+        print("Update der Stationen")
+        self.showTrayMessage("ER", "Update der Stationen", self.tIcon)
+        updater = exclusive_radio_api_get_D.Updater()
+        updater.update()
+        self.showTrayMessage("ER", "Update der Stationen abgeschlossen.\nNeue Sender sind nach Neustart verfügbar.", self.tIcon)
+        print("Update der Stationen abgeschlossen.")
 
     def showMain(self):
         if self.isVisible() == False:
@@ -432,10 +452,10 @@ class MainWin(QMainWindow):
         if wget != "":
             print(f"wget gefunden in {wget} *** Aufnahme möglich")
             self.statusLabel.setText("Aufnahmen möglich")
-            self.showTrayMessage("Note", "wget gefunden\nAufnahme möglich", self.tIcon)
+            self.showTrayMessage("ER", "wget gefunden\nAufnahme möglich", self.tIcon)
             self.recording_enabled = True
         else:
-            self.showTrayMessage("Note", "wget nicht gefunden \nKeine Aufnahme möglich", self.tIcon)
+            self.showTrayMessage("ER", "wget nicht gefunden \nKeine Aufnahme möglich", self.tIcon)
             print("wget nicht gefunden \nKeine Aufnahme möglich")
             self.recording_enabled = False
 

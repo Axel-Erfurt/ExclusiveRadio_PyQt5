@@ -33,9 +33,10 @@ class Updater():
     def getValues(self):
         theList = []
         for line in self.data:
-            name = line.get('title')['rendered'].replace('Exclusively ', '').replace('Exclusively-', '').replace('&#8217;',"'").replace('&#038;', '& ')
+            name = line.get('title')['rendered'].replace('Exclusively ', '').replace('Exclusively-', '').replace('&#8217;',"'").replace('&#038;', ' and ')
             if name.startswith("-") and name.endswith("-"):
                 name = name.replace("-", "")
+            name = name.replace(",", " ")
             url = line.get('_exr_postmeta_stream').replace('https', 'http')
             if "radioboss" in url:
                 url = f'http://streaming.exclusive.radio/er/{name.replace(" ", "").lower()}/icecast.audio'
@@ -66,6 +67,7 @@ class Updater():
                 if self.genreList[x] == g:
                     self.result.append(f'{self.nameList[x]},{self.urlList[x]},{self.imageList[x]}')
         return('\n'.join(self.result))
+        print('\n'.join(self.result))
 
         
 #upd = Updater()

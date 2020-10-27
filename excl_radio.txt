@@ -15,15 +15,14 @@ Good Afternoon,http://streaming.exclusive.radio/er/afternoon/icecast.audio,https
 Good Evening,http://streaming.exclusive.radio/er/goodevening/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2019/10/good-morning-good-afternoon-good-evening-clipart-clipartfest-jpg-good-morning-good-afternoon-good-evening-png-449_319-1-300x214.jpg
 Good Morning,http://streaming.exclusive.radio/er/goodmorning/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2019/10/good-morning-good-afternoon-good-evening-clipart-clipartfest-jpg-good-morning-good-afternoon-good-evening-png-449_319-1-300x214.jpg
 Happy,http://streaming.exclusive.radio/er/happy/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/07/happy-300x225.jpg
-Hollywood &  Broadway Musicals,http://streaming.exclusive.radio/er/hollywoodandbroadway/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/07/Hollywood-Broadway-Musicals-300x169.jpg
-John Paul George &  Ringo,http://streaming.exclusive.radio/er/johnpaulgeorgeringo/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/07/John-Paul-George-Ringo-1-300x200.jpg
-Movie &  TV Themes,http://streaming.exclusive.radio/er/movieandtvthemes/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/07/movie-film-video-production-ss-1920-800x450-1-300x169.jpg
+Hollywood  and  Broadway Musicals,http://streaming.exclusive.radio/er/hollywoodandbroadway/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/07/Hollywood-Broadway-Musicals-300x169.jpg
+John Paul George  and  Ringo,http://streaming.exclusive.radio/er/johnpaulgeorgeringo/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/07/John-Paul-George-Ringo-1-300x200.jpg
+Movie  and  TV Themes,http://streaming.exclusive.radio/er/movieandtvthemes/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/07/movie-film-video-production-ss-1920-800x450-1-300x169.jpg
 Party,http://streaming.exclusive.radio/er/party/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2019/10/Party-e1570720906762-300x200.jpg
 Pop Princesses,http://streaming.exclusive.radio/er/popprincesses/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/07/Pop-Princesses-3-300x223.jpg
 Rat Pack,http://streaming.exclusive.radio/er/ratpack/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/07/Ratpack-1-300x237.jpg
 Reggae Party,http://streaming.exclusive.radio/er/reggaeparty/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2019/10/Reggae-Party-e1570724410985-300x185.jpg
 Rock N' Roll Party,http://streaming.exclusive.radio/er/rocknrollparty/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/01/Rock-Roll-3-e1579026161173-300x200.jpg
-Soul Royalty,http://streaming.exclusive.radio/er/soulroyalty/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/07/SoulRoyalty_WhiteTank-300x300.jpg
 Wedding,http://streaming.exclusive.radio/er/wedding/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2019/10/WindoutBarnFarmWeddingPhotographs023_-300x200.jpg
 Wedding Classical,http://streaming.exclusive.radio/er/weddingclassical/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/05/Wedding-Classical-1-300x198.jpg
 West Coast,http://streaming.exclusive.radio/er/westcoast/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/07/West-Coast-1-300x200.jpg
@@ -38,7 +37,6 @@ Alec Benjamin,http://streaming.exclusive.radio/er/alecbenjamin/icecast.audio,htt
 Ariana Grande,http://streaming.exclusive.radio/er/arianagrande/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2019/08/Exclusively-Ariana-Grande-300x200.jpg
 Avicii,http://streaming.exclusive.radio/er/avicii/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/06/Avicii-2-300x169.jpg
 Beyonce,http://streaming.exclusive.radio/er/beyonce/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2019/08/beyonce-300x200.png
-Bieber,http://streaming.exclusive.radio/er/justinbieber/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2019/08/Exclusively-Bieber-300x200.png
 Billie Eilish,http://streaming.exclusive.radio/er/billyeilish/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/01/Billie-Eilish-1-300x200.jpg
 Britney Spears,http://streaming.exclusive.radio/er/britney/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2019/08/brit-300x200.png
 Bruno Mars,http://streaming.exclusive.radio/er/brunomars/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2019/08/Bruno-Mars-1-300x166.jpg
@@ -60,6 +58,7 @@ Imagine Dragons,http://streaming.exclusive.radio/er/imaginedragons/icecast.audio
 James Blunt,http://streaming.exclusive.radio/er/jamesblunt/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/07/James-Blunt-4-300x169.jpg
 Jennifer Lopez,http://streaming.exclusive.radio/er/jenniferlopez/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2019/08/Exclusively-Jennifer-Lopez-300x200.png
 Jonas Brothers,http://streaming.exclusive.radio/er/jonasbrothers/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/05/Jonas-Brothers-2-300x180.jpg
+Justin Bieber,http://streaming.exclusive.radio/er/justinbieber/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2019/08/Exclusively-Bieber-300x200.png
 Justin Timberlake,http://streaming.exclusive.radio/er/justintimberlake/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2019/08/justintimberlake2_300x200-300x200.png
 Katy Perry,http://streaming.exclusive.radio/er/katyperry/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2019/08/Exclusively-Katy-Perry-300x200.png
 Kehlani,http://streaming.exclusive.radio/er/kehlani/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/08/Kehlani-2-300x225.jpg
@@ -126,6 +125,7 @@ will.i.am,http://streaming.exclusive.radio/er/william/icecast.audio,https://excl
 A-Ha,http://streaming.exclusive.radio/er/aha/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/06/A-Ha-300x300.jpg
 ABBA,http://streaming.exclusive.radio/er/abba/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2019/08/Exclusively-ABBA-1-300x200.jpg
 Alice Cooper,http://streaming.exclusive.radio/er/alicecooper/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/06/Alice-Cooper-2-300x225.jpg
+Alison Moyet,http://streaming.exclusive.radio/er/alisonmoyet/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/08/Alison-Moyet-4-300x225.jpg
 Annie Lennox,http://streaming.exclusive.radio/er/annielennox/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/07/Annie-Lennox-300x211.jpg
 Backstreet Boys,http://streaming.exclusive.radio/er/backstreetboys/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/07/Backstreet-Boys-300x198.jpg
 Barry Manilow,http://streaming.exclusive.radio/er/barrymanilow/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/07/Barry-Manilow-4-300x188.jpg
@@ -154,12 +154,12 @@ Eric Clapton,http://streaming.exclusive.radio/er/ericclapton/icecast.audio,https
 Eurythmics,http://streaming.exclusive.radio/er/eurythmics/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/06/Eurythmics-4-300x169.jpg
 Fats Domino,http://streaming.exclusive.radio/er/fatsdomino/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/07/Fats-Domino-300x169.jpg
 Frank Sinatra,http://streaming.exclusive.radio/er/franksinatra/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2019/09/Frank-Sinatra-3-e1568103861763-300x200.jpg
-Frankie Valli &  The Four Seasons,http://streaming.exclusive.radio/er/frankievalli/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/07/Frankie-Valli-The-Four-Seasons-300x169.jpg
+Frankie Valli  and  The Four Seasons,http://streaming.exclusive.radio/er/frankievalli/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/07/Frankie-Valli-The-Four-Seasons-300x169.jpg
 George Benson,http://streaming.exclusive.radio/er/georgebenson/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/07/George-Benson-1-300x169.jpg
 George Harrison,http://streaming.exclusive.radio/er/georgeharrison/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/06/George-Harrison-1-300x192.jpg
 George Michael,http://streaming.exclusive.radio/er/georgemichael/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2019/08/Exclusively-George-Michael-300x200.png
 Gloria Estefan,http://streaming.exclusive.radio/er/gloriaestefan/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/07/Gloria-Estefan-2-300x200.jpg
-Hall &  Oates,http://streaming.exclusive.radio/er/hallandoates/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/06/Hall-And-Oates-4-300x168.jpg
+Hall  and  Oates,http://streaming.exclusive.radio/er/hallandoates/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/06/Hall-And-Oates-4-300x168.jpg
 Jackie Wilson,http://streaming.exclusive.radio/er/jackiewilson/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/07/Jackie-Wilson-300x169.jpg
 Jackson Browne,http://streaming.exclusive.radio/er/jacksonbrowne/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/08/Jackson-Browne-1-300x169.jpg
 Jason Donovan,http://streaming.exclusive.radio/er/jasondonovan/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/07/Jason-Donovan-300x200.jpg
@@ -167,6 +167,7 @@ Jerry Lee Lewis,http://streaming.exclusive.radio/er/jerryleelewis/icecast.audio,
 John Legend,http://streaming.exclusive.radio/er/johnlegend/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/07/John-Legend-3-300x202.jpg
 John Lennon,http://streaming.exclusive.radio/er/lennon/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/02/john-lennon-300x167.jpg
 Johnny Cash,http://streaming.exclusive.radio/er/johnnycash/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2019/09/Johnny-Cash-3-e1569838545475-300x200.jpg
+Johnny Nash,http://streaming.exclusive.radio/er/johnnynash/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/10/Johnny-Nash-300x150.jpg
 Kate Bush,http://streaming.exclusive.radio/er/katebush/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/07/Kate-Bush-300x240.jpg
 Keane,http://streaming.exclusive.radio/er/keane/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/06/Keane-300x169.jpeg
 Kenny Rogers,http://streaming.exclusive.radio/er/kennyrogers/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/03/Kenny-Rogers-300x200.jpeg
@@ -191,7 +192,7 @@ Rod Stewart,http://streaming.exclusive.radio/er/rodstewart/icecast.audio,https:/
 Roxette,http://streaming.exclusive.radio/er/roxette/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/06/Roxette-300x216.jpg
 Roy Orbison,http://streaming.exclusive.radio/er/royorbison/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/04/Roy-Orbison-1-300x198.jpg
 Savage Garden,http://streaming.exclusive.radio/er/savagegarden/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/06/Savage-Garden-3-300x178.jpg
-Simon &  Garfunkel,http://streaming.exclusive.radio/er/simongarfunkle/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/02/simon-and-garfunkel-300x194.jpg
+Simon  and  Garfunkel,http://streaming.exclusive.radio/er/simongarfunkle/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/02/simon-and-garfunkel-300x194.jpg
 Small Faces,http://streaming.exclusive.radio/er/smallfaces/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/07/Small-Faces-300x255.jpg
 Snow Patrol,http://streaming.exclusive.radio/er/snowpatrol/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/07/Snow-Patrol-300x169.jpg
 Spandau Ballet,http://streaming.exclusive.radio/er/spandauballet/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/06/Spandau-Ballet-300x187.jpeg
@@ -222,6 +223,7 @@ Tina Turner,http://streaming.exclusive.radio/er/tinaturner/icecast.audio,https:/
 Tom Jones,http://streaming.exclusive.radio/er/tomjones/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/04/Tom-Jones-2-300x188.jpg
 Tom Petty,http://streaming.exclusive.radio/er/tompetty/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/04/Tom-Petty-1-300x200.jpg
 Tony Bennett,http://streaming.exclusive.radio/er/tonybennett/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/07/Tony-Bennett-3-300x169.jpg
+Toots And The Maytals,http://streaming.exclusive.radio/er/tootsandthemaytals/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/09/Toots-The-Maytals-3-300x169.jpg
 UB40,http://streaming.exclusive.radio/er/ub40/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/07/UB40-300x207.jpg
 Van Morrison,http://streaming.exclusive.radio/er/vanmorrison/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2019/09/Van-Morrison-3-300x200.jpg
 Wham!,http://streaming.exclusive.radio/er/wham/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/07/Wham-300x225.jpg
@@ -241,7 +243,7 @@ Whitney Houston,http://streaming.exclusive.radio/er/whitneyhouston/icecast.audio
 AC/DC,http://streaming.exclusive.radio/er/acdc/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2019/09/AC-DC-1-e1568102483796-300x200.jpg
 Aerosmith,http://streaming.exclusive.radio/er/aerosmith/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/02/Aerosmith-300x169.jpg
 Black Sabbath,http://streaming.exclusive.radio/er/blacksabbath/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/04/Black-Sabbath-3-300x200.jpg
-Bon Jovi,http://streaming.exclusive.radio/er/bonjovi/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/04/Bon-Jovi-1-300x201.jpg
+Bon Jovi,http://streaming.exclusive.radio/er/bonjovi/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/04/bon-jovi-new-300x300.jpg
 Deep Purple,http://streaming.exclusive.radio/er/deeppurple/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/06/Deep-Purple-1-300x180.jpg
 Def Leppard,http://streaming.exclusive.radio/er/defleppard/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/05/Def-Leppard-2-300x231.jpg
 Foo Fighters,http://streaming.exclusive.radio/er/foofighters/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/06/Foo-Fighters-2-300x169.jpg
@@ -271,9 +273,9 @@ Al Green,http://streaming.exclusive.radio/er/algreen/icecast.audio,https://exclu
 Aretha Franklin,http://streaming.exclusive.radio/er/arethafranklin/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/05/Aretha-Franklin-1-300x169.jpg
 Barry White,http://streaming.exclusive.radio/er/barrywhite/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/05/Barry-White-1-300x169.jpg
 Bill Withers,http://streaming.exclusive.radio/er/billwithers/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/04/Bill-Withers-1-300x168.jpg
-Booker T &  The MG's,http://streaming.exclusive.radio/er/bookert/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/07/Booker-T-The-MGs-300x204.jpg
+Booker T  and  The MG's,http://streaming.exclusive.radio/er/bookert/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/07/Booker-T-The-MGs-300x204.jpg
 Chic,http://streaming.exclusive.radio/er/chic/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/07/chic_300x200.gif
-Earth, Wind &  Fire,http://streaming.exclusive.radio/er/earthwindandfire/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/07/Earth-Wind-And-Fire-3-e1593863593285-300x187.jpg
+Earth  Wind  and  Fire,http://streaming.exclusive.radio/er/earthwindandfire/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/07/Earth-Wind-And-Fire-3-e1593863593285-300x187.jpg
 James Brown,http://streaming.exclusive.radio/er/jamesbrown/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/05/James-Brown-2-300x152.jpg
 Janet Jackson,http://streaming.exclusive.radio/er/janetjackson/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/07/JANET-JACKSON-300x158.jpg
 Lionel Richie,http://streaming.exclusive.radio/er/lionelrichie/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/04/Lionel_Richie_738x415-300x169.jpg
@@ -357,7 +359,7 @@ Foreigner,http://streaming.exclusive.radio/er/foreigner/icecast.audio,https://ex
 Genesis,http://streaming.exclusive.radio/er/genesis/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/06/Genesis-1-300x200.jpg
 Gram Parsons,http://streaming.exclusive.radio/er/gramparsons/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/07/Gram-Parsons-300x150.jpg
 Grateful Dead,http://streaming.exclusive.radio/er/gratefuldead/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/06/Grateful-Dead-2-300x225.jpg
-Huey Lewis &  The News,http://streaming.exclusive.radio/er/hueylewis/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/06/HUEY-LEWIS-THE-NEWS-300x200.jpg
+Huey Lewis  and  The News,http://streaming.exclusive.radio/er/hueylewis/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/06/HUEY-LEWIS-THE-NEWS-300x200.jpg
 INXS,http://streaming.exclusive.radio/er/INXS/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/06/INXS-4-300x193.jpg
 Journey,http://streaming.exclusive.radio/er/journey/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/06/Journey-300x200.png
 Little Feat,http://streaming.exclusive.radio/er/littlefeat/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/05/Little-Feat-3-300x169.jpg
@@ -402,35 +404,45 @@ Robert Cray,http://streaming.exclusive.radio/er/robertcray/icecast.audio,https:/
 Stevie Ray Vaughan,http://streaming.exclusive.radio/er/stevierayvaughan/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2019/09/Stevie-Ray-Vaughan-3-e1568108618620-300x200.jpg
 The Yardbirds,http://streaming.exclusive.radio/er/theyardbirds/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/07/The-Yardbirds-1-300x200.jpg
 -- Exclusive Radio New Station --
+Cruisin' 50's,http://streaming.exclusive.radio/er/cruisin50s/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/08/Cruisin-300x225.jpg
+Cruisin' 60's,http://streaming.exclusive.radio/er/cruisin60s/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/08/Cruisin-300x225.jpg
 Andrea Bocelli,http://streaming.exclusive.radio/er/andreabocelli/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/08/Andrea-Bocelli-2-300x169.jpg
 Bette Midler,http://streaming.exclusive.radio/er/bettemidler/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/07/Bette-Midler-300x169.jpg
 Bing Crosby,http://streaming.exclusive.radio/er/bingcrosby/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/08/Bing-Crosby-1-300x210.jpg
 Bo Diddley,http://streaming.exclusive.radio/er/bodiddley/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/08/Bo-Diddley-2-300x213.jpg
 Cheap Trick,http://streaming.exclusive.radio/er/cheaptrick/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/07/Cheap-Trick-300x210.jpg
 Colt Ford,http://streaming.exclusive.radio/er/coltford/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/08/Colt-Ford-3-300x208.jpg
-Cruisin' 50's,http://streaming.exclusive.radio/er/cruisin50s/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/08/R-5635474-1474996017-7431.jpeg-290x300.jpg
-Cruisin' 60's,http://streaming.exclusive.radio/er/cruisin60s/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/08/R-5635474-1474996017-7431.jpeg-290x300.jpg
+Crooners,http://streaming.exclusive.radio/er/crooners/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/08/Frank_Sinatra_ca._1947-242x300.jpg
 Curtis Mayfield,http://streaming.exclusive.radio/er/curtismayfield/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/07/Curtis-Mayfield-300x203.jpg
 Dallas Smith,http://streaming.exclusive.radio/er/dallassmith/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/07/Dallas-Smith-300x200.jpg
+Divas,http://streaming.exclusive.radio/er/divas/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/08/product_airgdivas-952x550-0.5x0-300x173.jpg
 Dr Hook,http://streaming.exclusive.radio/er/drhook/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/07/Dr-Hook-1-300x187.jpg
-Emerson, Lake &  Palmer,http://streaming.exclusive.radio/er/emersonlakepalmer/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/08/Emerson-Lake-Palmer-2-300x200.jpg
+Emerson  Lake  and  Palmer,http://streaming.exclusive.radio/er/emersonlakepalmer/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/08/Emerson-Lake-Palmer-2-300x200.jpg
 Eva Cassidy,http://streaming.exclusive.radio/er/evacassidy/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/07/Eva-Cassidy-300x169.jpg
 Florida Georgia Line,http://streaming.exclusive.radio/er/floridageorgialine/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/08/Florida-Georgia-Line-4-300x173.jpg
+Good Night,http://streaming.exclusive.radio/er/goodnight/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2019/10/good-morning-good-afternoon-good-evening-clipart-clipartfest-jpg-good-morning-good-afternoon-good-evening-png-449_319-1-300x214.jpg
 Howlin Wolf,http://streaming.exclusive.radio/er/howlinwolf/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/08/Howlin-Wolf-300x180.jpg
+Indie,http://streaming.exclusive.radio/er/indie/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/09/indie2-300x224.jpg
 Jack Johnson,http://streaming.exclusive.radio/er/jackjohnson/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/07/Jack-Johnson-300x200.jpg
 Jefferson Airplane,http://streaming.exclusive.radio/er/jeffersonairplane/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/08/Jefferson-Airplane-3-300x225.jpg
 Joan Jett,http://streaming.exclusive.radio/er/joanjett/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/08/Joan-Jett-And-The-Blackhearts-3-300x200.jpg
 Joe Satriani,http://streaming.exclusive.radio/er/joesatriani/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/08/Joe-Satriani-1-300x218.jpg
+Judy Collins,http://streaming.exclusive.radio/er/judycollins/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/08/Judy-Collins-300x300.jpg
 Kate Rusby,http://streaming.exclusive.radio/er/katerusby/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/07/Kate-Rusby-300x169.jpg
 Kenny G,http://streaming.exclusive.radio/er/kennyg/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/08/Kenny-G-300x200.jpg
 Kiefer Sutherland,http://streaming.exclusive.radio/er/kiefersutherland/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/08/Kiefer-Sutherland-3-300x206.jpg
 Kip Moore,http://streaming.exclusive.radio/er/kipmoore/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/08/Kip-Moore-4-300x200.jpg
+Love,http://streaming.exclusive.radio/er/love/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/09/Love-300x203.jpg
 Luke Bryan,http://streaming.exclusive.radio/er/lukebryan/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/08/Luke-Bryan-1-300x199.jpg
 Metallica,http://streaming.exclusive.radio/er/metallica/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/08/Metallica-3-300x169.jpg
+Michael Bolton,http://streaming.exclusive.radio/er/michaelbolton/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/08/Michael-Bolton-3-300x169.jpg
 Run-DMC,http://streaming.exclusive.radio/er/rundmc/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/07/Run-DMC-300x231.jpg
 Sade,http://streaming.exclusive.radio/er/sade/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/07/Sade-2-300x204.jpg
+Soul Royalty,http://streaming.exclusive.radio/er/soulroyalty/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/07/SoulRoyalty_WhiteTank-300x300.jpg
 The Black Crowes,http://streaming.exclusive.radio/er/theblackcrowes/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/08/Black-Crowes-3-300x200.jpg
+The First Ladies Of Song,http://streaming.exclusive.radio/er/firstladies/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/08/First-Ladies-of-Song-300x240.jpg
 Toby Keith,http://streaming.exclusive.radio/er/tobykeith/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/08/Toby-Keith-3-300x225.jpg
+Tom Paxton,http://streaming.exclusive.radio/er/tompaxton/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/08/Tom-Paxton-4-300x168.jpg
 Tom Waits,http://streaming.exclusive.radio/er/tomwaits/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/08/Tom-Waits-2-300x169.jpg
 Woody Guthrie,http://streaming.exclusive.radio/er/woodieguthrie/icecast.audio,https://exclusive.radio/app/wp-content/uploads/2020/07/Woody-Guthrie-300x169.jpg
 -- Exclusive Radio Easy --

@@ -3,7 +3,7 @@
 import os
 import sys
 import requests
-from PyQt5.QtCore import (QUrl, pyqtSignal, Qt, QMimeData, QSize, QPoint, QProcess, 
+from PyQt5.QtCore import (QUrl, Qt, QMimeData, QSize, QPoint, QProcess, 
                             QStandardPaths, QFile, QSettings, QEvent)
                             
 from PyQt5.QtWidgets import (QApplication, QWidget, QPushButton, QSlider, QStatusBar, 
@@ -15,7 +15,6 @@ from PyQt5.QtMultimedia import QMediaPlayer, QMediaContent
 from PyQt5.QtGui import (QIcon, QPixmap, QDesktopServices)
 import exclusive_radio_api_get_D
 
-changed = pyqtSignal(QMimeData)
 btnwidth = 48
         
 
@@ -160,6 +159,8 @@ class MainWin(QMainWindow):
         self.recordAction = QAction(QIcon.fromTheme("media-record"), "Kanal aufnehmen", triggered = self.recordRadio)
         self.stopRecordAction = QAction(QIcon.fromTheme("media-playback-stop"), "Aufnahme stoppen", 
                                 triggered = self.stop_recording)
+                                
+        self.show()
         self.findExecutable()
         self.readSettings()
         self.makeTrayMenu()
@@ -224,7 +225,7 @@ class MainWin(QMainWindow):
             self.togglePlayerAction.setIcon(QIcon.fromTheme("media-playback-start"))
         else:
             self.playRadioStation()
-            self.togglePlayerAction.setText("Aufnahme stoppen")
+            self.togglePlayerAction.setText("Wiedergabe stoppen")
             self.togglePlayerAction.setIcon(QIcon.fromTheme("media-playback-stop"))
             
     def createWindowMenu(self):
@@ -343,16 +344,7 @@ class MainWin(QMainWindow):
         elif self.isVisible() == True:
             self.showWinAction.setText("Hauptfenster anzeigen")
             self.setVisible(False)
-            
-    def showMainfromTray(self):
-        buttons = qApp.mouseButtons()
-        if buttons == Qt.LeftButton:
-            if self.isVisible() == False:
-                self.showWinAction.setText("Hauptfenster ausblenden")
-                self.setVisible(True)
-            elif self.isVisible() == True:
-                self.showWinAction.setText("Hauptfenster anzeigen")
-                self.setVisible(False)
+
             
     def toggleNotif(self):
         if self.notifAction.text() == "Tray Meldungen deaktivieren":
@@ -361,7 +353,7 @@ class MainWin(QMainWindow):
         elif self.notifAction.text() == "Tray Meldungen aktivieren":
             self.notifAction.setText("Tray Meldungen deaktivieren")
             self.notificationsEnabled = True
-        print(f"Notifications {self.notificationsEnabled}")
+        print(f"Tray Meldungen: {self.notificationsEnabled}")
         self.metaDataChanged()
 
     def openTrayStation(self):
@@ -370,20 +362,20 @@ class MainWin(QMainWindow):
             ind = action.data()
             name = action.text()     
             self.urlCombo.setCurrentIndex(self.urlCombo.findText(name))
-            print(f"swith to Station: {ind} - {self.urlCombo.currentText()}")
+            print(f"umschalten zu Kanal: {ind} - {self.urlCombo.currentText()}")
 
     def exitApp(self):
         self.close()
-        QApplication.quit()
 
     def message(self, message):
         QMessageBox.information(
                 None, 'Message', message)
 
     def closeEvent(self, e):
-        self.writeSettings()
+        self.player.stop()
         print("schreibe Konfigurationsdatei ...\nAuf Wiedersehen ...")
-        QApplication.quit()
+        self.writeSettings()
+        app.quit()
         
 
     def readSettings(self):
@@ -414,7 +406,7 @@ class MainWin(QMainWindow):
                 self.showWinAction.setText("Hauptfenster anzeigen")
         if self.settings.contains("volume"):
             vol = self.settings.value("volume")
-            print(f"set volume to {vol}")
+            print(f"setze Lautstärke auf {vol}")
             self.level_sld.setValue(int(vol))
                 
     def writeSettings(self):
@@ -450,13 +442,13 @@ class MainWin(QMainWindow):
     def findExecutable(self):
         wget = QStandardPaths.findExecutable("wget")
         if wget != "":
-            print(f"wget gefunden in {wget} *** Aufnahme möglich")
-            self.statusLabel.setText("Aufnahmen möglich")
-            self.showTrayMessage("ER", "wget gefunden\nAufnahme möglich", self.tIcon)
+            print(f"wget gefunden in {wget} *** Aufnahme aktiviert")
+            self.statusLabel.setText("Aufnahmen aktiviert")
+            self.showTrayMessage("ER", "wget gefunden\nAufnahme aktiviert", self.tIcon)
             self.recording_enabled = True
         else:
-            self.showTrayMessage("ER", "wget nicht gefunden \nKeine Aufnahme möglich", self.tIcon)
-            print("wget nicht gefunden \nKeine Aufnahme möglich")
+            self.showTrayMessage("ER", "wget nicht gefunden \nKeine Aufnahme aktiviert", self.tIcon)
+            print("wget nicht gefunden \nKeine Aufnahme aktiviert")
             self.recording_enabled = False
 
     def remove_last_line_from_string(self, s):
@@ -501,7 +493,7 @@ class MainWin(QMainWindow):
                 if self.notificationsEnabled:
                     if not mt == self.old_meta:
                         print(mt)
-                        self.showTrayMessage("Exclusive Radio", f"{mt.split(' - ')[0]}\n{mt.split(' - ')[1]}", self.tIcon)
+                        self.showTrayMessage("Exclusive Radio", f"{mt.split(' - ')[0]}\n{mt.split(' - ')[1]}", self.trayIcon.icon())
                         self.old_meta = mt
                     self.trayIcon.setToolTip(mt)
                 else:
@@ -512,6 +504,7 @@ class MainWin(QMainWindow):
         
 
     def url_changed(self):
+        self.player.stop()
         if self.urlCombo.currentIndex() < self.urlCombo.count() - 1:
             if not self.urlCombo.currentText().startswith("--"):
                 ind = self.urlCombo.currentIndex()
@@ -523,6 +516,7 @@ class MainWin(QMainWindow):
                 pixmap = QPixmap()
                 pixmap.loadFromData(data)
                 self.er_label.setPixmap(pixmap)
+                #self.trayIcon.setIcon(QIcon(pixmap))
                 url = self.radiolist[ind]
                 
                 self.current_station = url
@@ -549,7 +543,7 @@ class MainWin(QMainWindow):
             self.set_running_player()
             self.player.start()
             self.stop_btn.setFocus()
-            self.togglePlayerAction.setText("Aufnahme stoppen")
+            self.togglePlayerAction.setText("Wiedergabe stoppen")
             self.togglePlayerAction.setIcon(QIcon.fromTheme("media-playback-stop"))
  
         if not self.current_station:
@@ -824,6 +818,4 @@ border: 1px solid #1f3c5d; }
 if __name__ == "__main__":
     app = QApplication([])
     win = MainWin()
-    app.setQuitOnLastWindowClosed(False)
-    #win.show()
     sys.exit(app.exec_())

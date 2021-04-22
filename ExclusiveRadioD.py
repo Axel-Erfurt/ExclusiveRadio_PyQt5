@@ -26,7 +26,6 @@ class MainWin(QMainWindow):
         self.radioNames = []
         self.radiolist = []
         self.channels = []
-        self.imagelist = []
         self.radiofile = ""
         self.radioStations = ""
         self.rec_name = ""
@@ -138,7 +137,7 @@ class MainWin(QMainWindow):
         self.stationActs = []
 
         self.layout.addItem(spc1)
-        self.setFixedSize(340, 360)
+        self.setFixedSize(340, 260)
         self.move(30, 30)
 
         # Init tray icon
@@ -260,16 +259,14 @@ class MainWin(QMainWindow):
                     break
         ####################################
         toolButton = QToolButton()
-        toolButton.setIcon(self.headerlogo)
-        toolButton.setToolButtonStyle(Qt.ToolButtonTextBesideIcon)
-        toolButton.setText("   Stationen")
-        toolButton.setFixedWidth(180)
+        toolButton.setText("Stationen")
+        toolButton.setFixedWidth(90)
         toolButton.setMenu(self.tb_menu)
         toolButton.setPopupMode(QToolButton.InstantPopup)
         self.tb.addWidget(toolButton)
         
         empty = QWidget()
-        empty.setFixedWidth(62)
+        empty.setFixedWidth(160)
         self.tb.addWidget(empty) 
 
         updateButton = QToolButton()
@@ -425,7 +422,6 @@ class MainWin(QMainWindow):
         self.urlCombo.clear()
         self.radiolist = []
         self.channels = []
-        self.imagelist = []
         dir = os.path.dirname(sys.argv[0])
         self.radiofile = os.path.join(dir, "excl_radio.txt")
         with open(self.radiofile, 'r') as f:
@@ -433,11 +429,10 @@ class MainWin(QMainWindow):
             f.close()
             for lines in self.radioStations.splitlines():
                 mLine = lines.split(",")
-                if len(mLine) > 2:
+                if len(mLine) > 1:
                     if not mLine[0].startswith("--"):
                         self.urlCombo.addItem(self.tIcon, mLine[0],Qt.UserRole - 1)
                         self.radiolist.append(mLine[1])
-                        self.imagelist.append(mLine[2])          
 
     def findExecutable(self):
         wget = QStandardPaths.findExecutable("wget")
@@ -485,7 +480,7 @@ class MainWin(QMainWindow):
             new_trackInfo = ""
             new_trackInfo = str(trackInfo)
             if not new_trackInfo == "None":
-                self.statusLabel.setText(f"{new_trackInfo.split(' - ')[0]}\n{new_trackInfo.split(' - ')[1]}")
+                self.statusLabel.setText(f"{new_trackInfo.split('-')[0]}\n{new_trackInfo.split('-')[1]}")
             else:
                 self.statusLabel.setText(f" spiele {self.urlCombo.currentText()}")
             mt = new_trackInfo
@@ -493,7 +488,7 @@ class MainWin(QMainWindow):
                 if self.notificationsEnabled:
                     if not mt == self.old_meta:
                         print(mt)
-                        self.showTrayMessage("Exclusive Radio", f"{mt.split(' - ')[0]}\n{mt.split(' - ')[1]}", self.trayIcon.icon())
+                        self.showTrayMessage("Exclusive Radio", f"{mt.split('-')[0]} - {mt.split('-')[1]}", self.trayIcon.icon())
                         self.old_meta = mt
                     self.trayIcon.setToolTip(mt)
                 else:
@@ -508,15 +503,8 @@ class MainWin(QMainWindow):
         if self.urlCombo.currentIndex() < self.urlCombo.count() - 1:
             if not self.urlCombo.currentText().startswith("--"):
                 ind = self.urlCombo.currentIndex()
-                
-                image = self.imagelist[ind]
-                print(f"Bild URL: {image}")
-                response = requests.get(image)
-                data = response.content
-                pixmap = QPixmap()
-                pixmap.loadFromData(data)
+                pixmap = self.headerlogo.pixmap(256)
                 self.er_label.setPixmap(pixmap)
-                #self.trayIcon.setIcon(QIcon(pixmap))
                 url = self.radiolist[ind]
                 
                 self.current_station = url
@@ -711,6 +699,7 @@ height: 20px;
 background: #2e3436;
 color: #73d216;
 font-size: 8pt;
+border: 0px;
 }
 QToolButton
 {

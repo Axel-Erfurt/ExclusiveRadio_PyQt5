@@ -24,7 +24,6 @@ class MainWin(QMainWindow):
         self.radioNames = []
         self.radiolist = []
         self.channels = []
-        self.imagelist = []
         self.radiofile = ""
         self.radioStations = ""
         self.rec_name = ""
@@ -35,26 +34,20 @@ class MainWin(QMainWindow):
         self.setContentsMargins(5 ,0, 5, 0)
         
         self.wg = QWidget()
-        self.er_label = QLabel("Image")
-        self.er_label.setScaledContents(False)
-        self.er_label.setSizePolicy(QSizePolicy.Minimum, QSizePolicy.Minimum)
         self.layout = QVBoxLayout()
 
         
         ### combo box
         self.urlCombo = QComboBox()
         
-        self.er_label.setAlignment(Qt.AlignCenter)
-        self.layout.addWidget(self.er_label, 0, Qt.AlignCenter) 
-        
         self.layout1 = QHBoxLayout()
         self.layout1.setContentsMargins(50 ,0, 50, 0)
-        self.tIcon = QIcon(os.path.join(os.path.dirname(sys.argv[0]), "logo.png"))
-        self.headerlogo = QIcon(os.path.join(os.path.dirname(sys.argv[0]), "headerlogo.png"))
-        self.playIcon = QIcon(os.path.join(os.path.dirname(sys.argv[0]), "media-playback-start.svg"))
-        self.stopIcon = QIcon(os.path.join(os.path.dirname(sys.argv[0]), "media-playback-stop.svg"))
-        self.recordIcon = QIcon(os.path.join(os.path.dirname(sys.argv[0]), "media-record.svg"))
-        self.hideIcon = QIcon(os.path.join(os.path.dirname(sys.argv[0]), "hide.png"))
+        self.tIcon = QIcon("logo.png")
+        self.headerlogo = QIcon("headerlogo.png")
+        self.playIcon = QIcon("media-playback-start.svg")
+        self.stopIcon = QIcon("media-playback-stop.svg")
+        self.recordIcon = QIcon("media-record.svg")
+        self.hideIcon = QIcon("hide.png")
         
         self.outfile = QStandardPaths.standardLocations(QStandardPaths.TempLocation)[0] + "/er_tmp.mp3"
         self.recording_enabled = False
@@ -136,7 +129,7 @@ class MainWin(QMainWindow):
         self.stationActs = []
 
         self.layout.addItem(spc1)
-        self.setFixedSize(340, 360)
+        self.setFixedSize(340, 200)
         self.move(30, 30)
 
         # Init tray icon
@@ -256,7 +249,8 @@ class MainWin(QMainWindow):
                 elif not line.startswith("--"):
                     menu_line = line.split(",")
                     ch = menu_line[0]
-                    self.stationActs.append(QAction(self.tIcon, ch, triggered = self.openTrayStation))
+                    self.stationActs.append(QAction(self.tIcon, ch, 
+                                                    triggered = self.openTrayStation))
                     self.stationActs[i].setData(str(i))
                     chm.addAction(self.stationActs[i])
                     i += 1
@@ -375,19 +369,17 @@ class MainWin(QMainWindow):
         self.urlCombo.clear()
         self.radiolist = []
         self.channels = []
-        self.imagelist = []
         dir = os.path.dirname(sys.argv[0])
-        self.radiofile = os.path.join(dir, "excl_radio.txt")
+        self.radiofile = "excl_radio.txt"
         with open(self.radiofile, 'r') as f:
             self.radioStations = f.read()
             f.close()
             for lines in self.radioStations.splitlines():
                 mLine = lines.split(",")
-                if len(mLine) > 2:
+                if len(mLine) > 1:
                     if not mLine[0].startswith("--"):
                         self.urlCombo.addItem(self.tIcon, mLine[0],Qt.UserRole - 1)
                         self.radiolist.append(mLine[1])
-                        self.imagelist.append(mLine[2])                   
 
     def findExecutable(self):
         wget = QStandardPaths.findExecutable("wget")
@@ -435,7 +427,7 @@ class MainWin(QMainWindow):
             new_trackInfo = ""
             new_trackInfo = str(trackInfo)
             if not new_trackInfo == "None":
-                self.statusLabel.setText(f"{new_trackInfo.split(' - ')[0]}\n{new_trackInfo.split(' - ')[1]}")
+                self.statusLabel.setText(f"{new_trackInfo.split('-')[0]}\n{new_trackInfo.split('-')[1]}")
             else:
                 self.statusLabel.setText(f" playing {self.urlCombo.currentText()}")
             mt = new_trackInfo
@@ -443,7 +435,7 @@ class MainWin(QMainWindow):
                 if self.notificationsEnabled:
                     if not mt == self.old_meta:
                         print(mt)
-                        self.showTrayMessage("Exclusive Radio", f"{mt.split(' - ')[0]}\n{mt.split(' - ')[1]}", self.tIcon)
+                        self.showTrayMessage("Exclusive Radio", f"{mt.split('-')[0]}\n{mt.split('-')[1]}", self.tIcon)
                         self.old_meta = mt
                     self.trayIcon.setToolTip(mt)
                 else:
@@ -457,18 +449,11 @@ class MainWin(QMainWindow):
         if self.urlCombo.currentIndex() < self.urlCombo.count() - 1:
             if not self.urlCombo.currentText().startswith("--"):
                 ind = self.urlCombo.currentIndex()
-                
-                image = self.imagelist[ind]
-                print(f"Image URL: {image}")
-                response = requests.get(image)
-                data = response.content
-                pixmap = QPixmap()
-                pixmap.loadFromData(data)
-                self.er_label.setPixmap(pixmap)
+                self.player.stop()
                 url = self.radiolist[ind]
                 
                 self.current_station = url
-                self.player.stop()
+                
                 self.rec_btn.setVisible(True)
                 self.stop_btn.setVisible(True)
                 self.play_btn.setVisible(True)
@@ -659,6 +644,7 @@ height: 20px;
 background: #2e3436;
 color: #73d216;
 font-size: 8pt;
+border: 0px;
 }
 QToolButton
 {
@@ -765,6 +751,7 @@ border: 1px solid #1f3c5d; }
 
 if __name__ == "__main__":
     app = QApplication([])
+    os.chdir(os.path.dirname(sys.argv[0]))
     win = MainWin()
     app.setQuitOnLastWindowClosed(False)
     #win.show()

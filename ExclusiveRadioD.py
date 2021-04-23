@@ -57,6 +57,9 @@ class MainWin(QMainWindow):
         self.recordIcon = QIcon(os.path.join(os.path.dirname(sys.argv[0]), "media-record.svg"))
         self.hideIcon = QIcon(os.path.join(os.path.dirname(sys.argv[0]), "hide.png"))
         
+        pixmap = self.headerlogo.pixmap(256)
+        self.er_label.setPixmap(pixmap)
+        
         self.outfile = QStandardPaths.standardLocations(QStandardPaths.TempLocation)[0] + "/er_tmp.mp3"
         self.recording_enabled = False
         self.is_recording = False
@@ -314,6 +317,7 @@ class MainWin(QMainWindow):
                 self.recordAction.setText(f"Starte Aufnahme von {self.urlCombo.currentText()}")
         if self.is_recording:
             self.tray_menu.addAction(self.stopRecordAction)
+        ####################################
         self.tray_menu.addSeparator()
         self.tray_menu.addAction(self.showWinAction)
         self.tray_menu.addSeparator()
@@ -503,8 +507,6 @@ class MainWin(QMainWindow):
         if self.urlCombo.currentIndex() < self.urlCombo.count() - 1:
             if not self.urlCombo.currentText().startswith("--"):
                 ind = self.urlCombo.currentIndex()
-                pixmap = self.headerlogo.pixmap(256)
-                self.er_label.setPixmap(pixmap)
                 url = self.radiolist[ind]
                 
                 self.current_station = url
@@ -594,20 +596,23 @@ class MainWin(QMainWindow):
 
     def stop_recording(self):
         if self.is_recording:
+            QProcess.execute("killall wget")
+            self.is_recording = False
             self.process.close()
             print("stoppe Aufnahme")
-            self.is_recording = False
-            QProcess.execute("killall wget")
-            self.saveRecord()
             self.stoprec_btn.setVisible(False)
             self.rec_btn.setVisible(True)
             self.recordAction.setText(f"start recording of {self.urlCombo.currentText()}")
             self.recordAction.setIcon(QIcon.fromTheme("media-record"))
+            self.saveRecord()
         else:
             self.showTrayMessage("Note", "Es wurde keine Aufnahme gestartet", self.tIcon)
 
     def saveRecord(self):
         if not self.is_recording:
+            if not self.isVisible():
+                self.showWinAction.setText("Hauptfenster ausblenden")
+                self.setVisible(True)
             print("Audio speichern")
             musicfolder = QStandardPaths.standardLocations(QStandardPaths.MusicLocation)[0]
             recname = self.rec_name.replace("-", " ").replace(" - ", " ") + ".mp3"
@@ -619,15 +624,18 @@ class MainWin(QMainWindow):
             if (savefile != ""):
                 if QFile(savefile).exists:
                     QFile(savefile).remove()
-                print(f"saving {savefile}")
+                print(f"speichere {savefile}")
                 if not infile.copy(savefile):
                     QMessageBox.warning(self, "Fehler",
                         f"Datei {savefile} {infile.errorString()}") 
+                else:
+                    print(savefile, "gespeichert")
                 print(f"Prozess-Status: {str(self.process.state())}")
                 if QFile(self.outfile).exists:
                     print("existiert")
                     QFile(self.outfile).remove()
-
+                    self.showWinAction.setText("Hauptfenster anzeigen")
+                    self.setVisible(False)
 
     def deleteOutFile(self):
         if QFile(self.outfile).exists:
@@ -797,10 +805,20 @@ border-radius: 4px;
 }
 QToolTip { 
 font-size: 9pt;
-color: #eeeeec; 
-background: #685c1b; 
+color: #111111; 
+background: #73d216; 
 height: 28px;
 border: 1px solid #1f3c5d; }
+
+QBalloonTip{ 
+background-color: #4e9a06;
+color: #000000;
+}
+
+QSystemTrayIcon{ 
+background-color: #4e9a06;
+color: #000000;
+}
     """    
 
 

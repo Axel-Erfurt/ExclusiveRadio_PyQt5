@@ -1,9 +1,8 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 import os
 import sys
-import requests
-from PyQt5.QtCore import (QUrl, Qt, QMimeData, QSize, QPoint, QProcess, 
+from PyQt5.QtCore import (QUrl, Qt, QSize, QPoint, QProcess, 
                             QStandardPaths, QFile, QSettings, QEvent)
                             
 from PyQt5.QtWidgets import (QApplication, QWidget, QPushButton, QSlider, QStatusBar, 
@@ -12,8 +11,8 @@ from PyQt5.QtWidgets import (QApplication, QWidget, QPushButton, QSlider, QStatu
                             QMessageBox, QSystemTrayIcon)
                             
 from PyQt5.QtMultimedia import QMediaPlayer, QMediaContent
-from PyQt5.QtGui import (QIcon, QPixmap, QDesktopServices)
-import exclusive_radio_api_get_D
+from PyQt5.QtGui import (QIcon, QDesktopServices)
+#import exclusive_radio_api_get_D
 
 btnwidth = 48
         
@@ -102,7 +101,7 @@ class MainWin(QMainWindow):
         self.level_sld.setToolTip("Lautstärkeregler")
         self.level_sld.setTickPosition(1)
         self.level_sld.setOrientation(Qt.Horizontal)
-        self.level_sld.setValue(65)
+        self.level_sld.setValue(50)
         self.level_lbl = QLabel(self)
         self.level_lbl.setAlignment(Qt.AlignHCenter)
         self.level_lbl.setText("Lautstärke 65")
@@ -272,12 +271,12 @@ class MainWin(QMainWindow):
         empty.setFixedWidth(160)
         self.tb.addWidget(empty) 
 
-        updateButton = QToolButton()
-        updateButton.setText("Update")
-        updateButton.setToolTip("Update der Stationen")
-        updateButton.setFixedWidth(70)
-        self.tb.addWidget(updateButton)        
-        updateButton.clicked.connect(self.updateChannels)     
+        #updateButton = QToolButton()
+        #updateButton.setText("Update")
+        #updateButton.setToolTip("Update der Stationen")
+        #updateButton.setFixedWidth(70)
+        #self.tb.addWidget(updateButton)        
+        #updateButton.clicked.connect(self.updateChannels)     
         
     def makeTrayMenu(self):
         self.stationActs = []
@@ -322,21 +321,21 @@ class MainWin(QMainWindow):
         self.tray_menu.addAction(self.showWinAction)
         self.tray_menu.addSeparator()
         self.tray_menu.addAction(self.notifAction)
-        self.tray_menu.addSeparator()
-        updateAction = self.tray_menu.addAction(QIcon.fromTheme("system-update"), "Update der Stationen")
-        updateAction.triggered.connect(self.updateChannels)
+        #self.tray_menu.addSeparator()
+        #updateAction = self.tray_menu.addAction(QIcon.fromTheme("system-update"), "Update der Stationen")
+        #updateAction.triggered.connect(self.updateChannels)
         self.tray_menu.addSeparator()
         exitAction = self.tray_menu.addAction(QIcon.fromTheme("application-exit"), "Exit")
         exitAction.triggered.connect(self.exitApp)
         self.trayIcon.setContextMenu(self.tray_menu)
         
-    def updateChannels(self):
-        print("Update der Stationen")
-        self.showTrayMessage("ER", "Update der Stationen", self.tIcon)
-        updater = exclusive_radio_api_get_D.Updater()
-        updater.update()
-        self.showTrayMessage("ER", "Update der Stationen abgeschlossen.\nNeue Sender sind nach Neustart verfügbar.", self.tIcon)
-        print("Update der Stationen abgeschlossen.")
+    #def updateChannels(self):
+    #    print("Update der Stationen")
+    #    self.showTrayMessage("ER", "Update der Stationen", self.tIcon)
+    #    updater = exclusive_radio_api_get_D.Updater()
+    #    updater.update()
+    #    self.showTrayMessage("ER", "Update der Stationen abgeschlossen.\nNeue Sender sind nach Neustart verfügbar.", self.tIcon)
+    #    print("Update der Stationen abgeschlossen.")
 
     def showMain(self):
         if self.isVisible() == False:
@@ -634,8 +633,9 @@ class MainWin(QMainWindow):
                 if QFile(self.outfile).exists:
                     print("existiert")
                     QFile(self.outfile).remove()
-                    self.showWinAction.setText("Hauptfenster anzeigen")
                     self.setVisible(False)
+                    self.showWinAction.setText("Hauptfenster anzeigen")
+
 
     def deleteOutFile(self):
         if QFile(self.outfile).exists:
@@ -764,7 +764,7 @@ background: #2e3436;
 }
 QSlider::handle:horizontal 
 {
-background: transparent;
+background: #4e9a06;
 width: 8px;
 height: 8px;
 border-radius: 4px;
@@ -776,39 +776,27 @@ height: 8px;
 background: #2e4d25;
 border-radius: 0px;
 }
+
 QSlider::sub-page:horizontal {
 background: #685c1b;
 border: 1px solid #c4a000;
 height: 6px;
 border-radius: 0px;
 }
+
 QSlider::handle:horizontal:hover {
-background: #73d216;
+background: #4e9a06;
 border-radius: 4px;
 height: 6px;
-width: 8px;
+width: 22px;
 }
 
-QSlider::sub-page:horizontal:disabled {
-background: #bbb;
-border-color: #999;
-}
-
-QSlider::add-page:horizontal:disabled {
-background: #eee;
-border-color: #999;
-}
-
-QSlider::handle:horizontal:disabled {
-background: #eee;
-border-radius: 4px;
-}
 QToolTip { 
 font-size: 9pt;
-color: #111111; 
-background: #73d216; 
+color: #ccc; 
+background: #555753; 
 height: 28px;
-border: 1px solid #1f3c5d; }
+border: 1px solid #2e3436; }
 
 QBalloonTip{ 
 background-color: #4e9a06;
